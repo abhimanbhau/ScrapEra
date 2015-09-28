@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ScrapEra.ScrapEngine
 {
-    public class Engine
+    public class CrawlerEngine
     {
-
+        public string url { get; set; }
     }
 }

@@ -8,9 +8,9 @@ namespace ScrapEra.ScrapEngine
 {
     public class Core
     {
-        public static Engine GetInstance()
+        public static CrawlerEngine GetInstance()
         {
-            return new Engine();
+            return new CrawlerEngine();
         }
     }
 }
