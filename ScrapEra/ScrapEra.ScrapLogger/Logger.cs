@@ -52,14 +52,5 @@ namespace ScrapEra.ScrapLogger
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), message);
             _stream.WriteLine();
         }
-
-        ~Logger()
-        {
-            if (_stream != null)
-            {
-                _stream.Flush();
-                _stream.Close();
-            }
-        }
     }
 }
