@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.Tests", "ScrapEra.
 		{9B8977FF-9336-4D74-875B-AAB7B7458C95} = {9B8977FF-9336-4D74-875B-AAB7B7458C95}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.OutputProcessor", "ScrapEra.OutputProcessor\ScrapEra.OutputProcessor.csproj", "{559E2242-4F8F-43B9-B57B-0D4D6435E443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{CBF91495-8507-4C52-A2F3-4727E6050407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBF91495-8507-4C52-A2F3-4727E6050407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBF91495-8507-4C52-A2F3-4727E6050407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{559E2242-4F8F-43B9-B57B-0D4D6435E443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{559E2242-4F8F-43B9-B57B-0D4D6435E443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{559E2242-4F8F-43B9-B57B-0D4D6435E443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{559E2242-4F8F-43B9-B57B-0D4D6435E443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
