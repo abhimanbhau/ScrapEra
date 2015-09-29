@@ -7,17 +7,21 @@ namespace ScrapEra.Tests
     {
         private static void Main(string[] args)
         {
-            var engine = new ScrapCore("http://gre.magoosh.com/questions/1");
-            foreach (var links in engine.GetAllLinks())
+            var threads = new ScrapThreaded();
+            for (var i = 1; i < 11; ++i)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine(links);
-            }
-
-            foreach (var paras in engine.GetAllParagraphText())
-            {
-                Console.BackgroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine(paras);
+                var url = string.Format("http://gre.magoosh.com/questions/{0}", i);
+                var stuff = threads.StartNewScrap(url);
+                foreach (var data in stuff)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine(data.Key);
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    foreach (var str in data.Value)
+                    {
+                        Console.WriteLine(str);
+                    }
+                }
             }
         }
     }

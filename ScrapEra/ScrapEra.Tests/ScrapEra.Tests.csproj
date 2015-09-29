@@ -48,6 +48,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScrapEra.OutputProcessor\ScrapEra.OutputProcessor.csproj">
+      <Project>{559e2242-4f8f-43b9-b57b-0d4d6435e443}</Project>
+      <Name>ScrapEra.OutputProcessor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScrapEra.ScrapEngine\ScrapEra.ScrapEngine.csproj">
       <Project>{4f1060f3-3df4-43bc-80e9-3400c75e4f27}</Project>
       <Name>ScrapEra.ScrapEngine</Name>

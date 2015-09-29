@@ -14,46 +14,38 @@ namespace ScrapEra.ScrapEngine
         public ScrapCore(string url)
         {
             Url = url;
-            Logger.LogI("Initialized crawler with URL='" + url + "'");
-            StartCrawl();
+            Logger.LogI(string.Format("ScrapCore -> Initialized crawler with URL='{0}'", url));
+            Links = new List<string>();
+            ParagraphText = new List<string>();
+            StartScrape();
         }
 
+        public List<string> Links { get; set; }
+        public List<string> ParagraphText { get; set; }
         public string Url { get; set; }
 
-        public void StartCrawl()
+        public void StartScrape()
         {
             try
             {
-                Logger.LogI("Initialized crawler with URL='" + Url + "'");
+                Logger.LogI("StartScrape -> Initialized crawler with URL='" + Url + "'");
                 var docUrl = new HtmlWeb();
                 _doc = docUrl.Load(Url);
+                ParagraphText = _doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerHtml).ToList();
+                foreach (var link in _doc.DocumentNode.SelectNodes("//a"))
+                {
+                    if (Regex.IsMatch(link.GetAttributeValue("href", link.OuterHtml),
+                        @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
+                    {
+                        Links.Add(link.GetAttributeValue("href", link.OuterHtml));
+                    }
+                }
             }
             catch (Exception e)
             {
-                Logger.LogE("Fatal Error -> " + e.StackTrace + Environment.NewLine
+                Logger.LogE("StartScrape -> " + e.StackTrace + Environment.NewLine
                             + e.Message);
             }
-        }
-
-        public List<string> GetAllParagraphText()
-        {
-            Logger.LogI(Url + " -> GetAllParagraphText");
-            return _doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerHtml).ToList();
-        }
-
-        public List<string> GetAllLinks()
-        {
-            Logger.LogI(Url + " -> GetAllLinks");
-            var links = new List<string>();
-            foreach (var link in _doc.DocumentNode.SelectNodes("//a"))
-            {
-                if (Regex.IsMatch(link.GetAttributeValue("href", link.OuterHtml),
-                    @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
-                {
-                    links.Add(link.GetAttributeValue("href", link.OuterHtml));
-                }
-            }
-            return links;
         }
 
         public List<string> GetDivisionByClass(string className)

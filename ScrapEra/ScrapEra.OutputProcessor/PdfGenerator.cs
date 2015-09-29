@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using ScrapEra.ScrapLogger;
 
 namespace ScrapEra.OutputProcessor
 {
@@ -10,22 +11,31 @@ namespace ScrapEra.OutputProcessor
     {
         public static void GeneratePdfSingleDataType(string filePath, string title, List<string> content)
         {
-            var doc = new Document(PageSize.A4, 36, 72, 108, 180);
-            var writer = PdfWriter.GetInstance(doc,
-                new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None));
-            doc.Open();
-            doc.AddTitle(title);
-            doc.AddAuthor(Environment.MachineName);
-            foreach (var para in content)
+            try
             {
-                doc.Add(new Paragraph(para));
+                Logger.LogI("GeneratePDF -> " + filePath);
+                var doc = new Document(PageSize.A4, 36, 72, 108, 180);
+                var writer = PdfWriter.GetInstance(doc,
+                    new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None));
+                doc.Open();
+                doc.AddTitle(title);
+                doc.AddAuthor(Environment.MachineName);
+                foreach (var para in content)
+                {
+                    doc.Add(new Paragraph(para));
+                }
+                doc.Close();
+                ApplyWaterMark(filePath);
             }
-            doc.Close();
-            ApplyWaterMark(filePath);
+            catch (Exception ex)
+            {
+                Logger.LogE(ex.Source + " -> " + ex.Message + "\n" + ex.StackTrace);
+            }
         }
 
         private static void ApplyWaterMark(string filePath)
         {
+            Logger.LogI("ApplyWatermark -> " + filePath);
             var watermarkedFile = filePath + "pro.pdf";
             var reader1 = new PdfReader(filePath);
             using (var fs = new FileStream(watermarkedFile, FileMode.Create, FileAccess.Write, FileShare.None))

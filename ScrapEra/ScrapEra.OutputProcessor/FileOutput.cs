@@ -18,12 +18,11 @@ namespace ScrapEra.OutputProcessor
                         stream.WriteLine(line);
                     }
                     stream.Flush();
-                    stream.Close();
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogE("Fatal Error -> " + ex.Message +
+                Logger.LogE(ex.Source + " -> " + ex.Message +
                             Environment.NewLine + ex.StackTrace);
             }
         }
