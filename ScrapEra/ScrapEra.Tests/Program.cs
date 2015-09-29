@@ -1,5 +1,6 @@
 ﻿using System;
 using ScrapEra.ScrapEngine;
+using ScrapEra.Utils;
 
 namespace ScrapEra.Tests
 {
@@ -11,17 +12,9 @@ namespace ScrapEra.Tests
             for (var i = 1; i < 11; ++i)
             {
                 var url = string.Format("http://gre.magoosh.com/questions/{0}", i);
-                var stuff = threads.StartNewScrap(url);
-                foreach (var data in stuff)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine(data.Key);
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    foreach (var str in data.Value)
-                    {
-                        Console.WriteLine(str);
-                    }
-                }
+                var core = new ScrapCore(url);
+                Console.WriteLine(PageLanguageDetection.
+                    GetContentLanguage(string.Join(" ", core.ParagraphText.ToArray())));
             }
         }
     }

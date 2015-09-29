@@ -1,8 +1,6 @@
 ﻿using System;
 using MetroFramework.Forms;
-using System.Windows.Forms;
-using MetroFramework;
-
+using ScrapEra.Gui.Properties;
 
 namespace ScrapEra.Gui
 {
@@ -15,6 +13,7 @@ namespace ScrapEra.Gui
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Text += " " + Settings.Default.Version;
         }
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -107,6 +108,18 @@
       <Project>{f31da3e4-2f1c-4e5c-a953-fbb5c99bdda7}</Project>
       <Name>ScrapEra.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-gears.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-gears1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-gears1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
