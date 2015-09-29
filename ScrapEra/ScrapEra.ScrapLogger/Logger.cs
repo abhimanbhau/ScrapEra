@@ -20,6 +20,7 @@ namespace ScrapEra.ScrapLogger
             message = string.Format("{0} {1}-{2} {3}", _infoSymbol,
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString(), message);
             Stream.WriteLine(message);
+            LogList.Add(message);
         }
 
         public static void LogE(string message)
@@ -27,6 +28,7 @@ namespace ScrapEra.ScrapLogger
             message = string.Format("{0} {1}-{2} {3}", _errorSymbol,
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString(), message);
             Stream.WriteLine(message);
+            LogList.Add(message);
         }
 
         public static void LogD(string message)
@@ -34,6 +36,7 @@ namespace ScrapEra.ScrapLogger
             message = string.Format("{0} {1}-{2} {3}", _debugSymbol,
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString(), message);
             Stream.WriteLine(message);
+            LogList.Add(message);
         }
 
         #region class fields

@@ -1,13 +1,6 @@
-#region Copyright Syncfusion Inc. 2001-2015.
-// Copyright Syncfusion Inc. 2001-2015. All rights reserved.
-// Use of this code is subject to the terms of our license.
-// A copy of the current license can be obtained at any time by e-mailing
-// licensing@syncfusion.com. Any infringement will be prosecuted under
-// applicable laws. 
-#endregion
-namespace ScrapEraGui
+﻿namespace ScrapEra.Gui
 {
-    partial class SplashForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,11 +28,21 @@ namespace ScrapEraGui
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "MetroForm1";
+            this.ClientSize = new System.Drawing.Size(567, 399);
+            this.Name = "MainForm";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
     }
 }
+

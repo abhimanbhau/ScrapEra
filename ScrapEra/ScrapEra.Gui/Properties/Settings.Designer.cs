@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScrapEraGui.Properties
+namespace ScrapEra.Gui.Properties
 {
 
 

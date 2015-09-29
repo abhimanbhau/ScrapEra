@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("ScrapEraGui")]
+[assembly: AssemblyTitle("ScrapEra.Utils")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ScrapEraGui")]
+[assembly: AssemblyProduct("ScrapEra.Utils")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("c620c7f9-8742-49b6-b0b0-b6dcda5359c9")]
+[assembly: Guid("e7cdfa2e-1a87-4841-9742-ddd2e1e0765a")]
 
 // Version information for an assembly consists of the following four values:
 //
