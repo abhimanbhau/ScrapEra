@@ -10,7 +10,7 @@ namespace ScrapEra.ScrapLogger
         {
             Instance = new Logger();
             var fileName = Path.GetTempFileName().Replace(".tmp", ".scrapLog");
-            Stream = new StreamWriter(fileName) { AutoFlush = true, NewLine = Environment.NewLine };
+            Stream = new StreamWriter(fileName) {AutoFlush = true, NewLine = Environment.NewLine};
         }
 
         public static Logger Instance { get; private set; }
