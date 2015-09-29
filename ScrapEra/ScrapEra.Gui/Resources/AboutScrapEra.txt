@@ -1,0 +1,4 @@
+ScrapEra
+
+ScrapEra is a web scraping framework which is targetted for general users.
+It makes use of crowd-funding to further reduce cost per scrape significantly.

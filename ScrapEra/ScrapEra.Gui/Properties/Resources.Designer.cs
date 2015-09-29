@@ -61,6 +61,15 @@ namespace ScrapEra.Gui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string AboutScrapEra {
+            get {
+                return ResourceManager.GetString("AboutScrapEra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {
@@ -76,16 +85,6 @@ namespace ScrapEra.Gui.Properties {
         internal static System.Drawing.Bitmap icon_gears {
             get {
                 object obj = ResourceManager.GetObject("icon-gears", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_gears1 {
-            get {
-                object obj = ResourceManager.GetObject("icon-gears1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
