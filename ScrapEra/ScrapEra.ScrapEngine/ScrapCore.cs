@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using ScrapEra.ScrapLogger;
@@ -20,26 +22,39 @@ namespace ScrapEra.ScrapEngine
             StartScrape();
         }
 
-        public List<string> Links { get; set; }
+        List<string> Links = new List<string>();
         public List<string> ParagraphText { get; set; }
         public string Url { get; set; }
 
-        public void StartScrape()
+        private void StartScrape()
         {
             try
             {
                 Logger.LogI("StartScrape -> Initialized crawler with URL='" + Url + "'");
                 var docUrl = new HtmlWeb();
+                docUrl.UserAgent =
+                    "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:42.0) Gecko/20100101 Firefox/42.0";
                 _doc = docUrl.Load(Url);
-                ParagraphText = _doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerHtml).ToList();
-                foreach (var link in _doc.DocumentNode.SelectNodes("//a"))
+                if (docUrl.StatusCode != HttpStatusCode.OK)
                 {
-                    if (Regex.IsMatch(link.GetAttributeValue("href", link.OuterHtml),
-                        @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
-                    {
-                        Links.Add(link.GetAttributeValue("href", link.OuterHtml));
-                    }
+                    Logger.LogE("StartScrape -> " + Url + " Errorcode -> " + docUrl.StatusCode);
+                    return;
                 }
+                ParagraphText = _doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerHtml).ToList();
+                //foreach (var link in _doc.DocumentNode.SelectNodes("//a"))
+                //{
+                //    try
+                //    {
+                //        if (Regex.IsMatch(link.GetAttributeValue("href", link.OuterHtml),
+                //            @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
+                //        {
+                //            Links.Add(link.GetAttributeValue("href", link.OuterHtml));
+                //        }
+                //    }
+                //    catch
+                //    {
+                //    }
+                //}
             }
             catch (Exception e)
             {
@@ -53,6 +68,21 @@ namespace ScrapEra.ScrapEngine
             Logger.LogI(Url + " -> GetDivisionByClass => '" + className + "'");
             return _doc.DocumentNode.SelectNodes("//div[@class='" + className + "']")
                 .Select(div => div.InnerHtml).ToList();
+        }
+
+        public List<String> GetAllLinks()
+        {
+            int linkCount = _doc.DocumentNode.SelectNodes("//a").Count;
+            var links = _doc.DocumentNode.SelectNodes("//a");
+            for (int i = 0; i < linkCount; ++i)
+            {
+                if (Regex.IsMatch(links[i].GetAttributeValue("href", links[i].OuterHtml),
+                        @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
+                {
+                    Links.Add(links[i].GetAttributeValue("href", links[i].OuterHtml));
+                }
+            }
+            return Links;
         }
 
         public List<string> GetDivisionById(string idName)

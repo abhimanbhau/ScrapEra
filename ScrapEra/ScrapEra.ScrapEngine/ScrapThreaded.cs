@@ -18,7 +18,7 @@ namespace ScrapEra.ScrapEngine
         {
             var data = new Dictionary<string, List<string>>();
             var core = new ScrapCore(url);
-            data.Add(url + "-links", core.Links);
+            data.Add(url + "-links", core.GetAllLinks());
             data.Add(url + "-para", core.ParagraphText);
             return data;
         }
