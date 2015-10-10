@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using ScrapEra.ScrapLogger;
@@ -11,6 +10,7 @@ namespace ScrapEra.ScrapEngine
 {
     public class ScrapCore
     {
+        private readonly List<string> Links = new List<string>();
         private HtmlDocument _doc;
 
         public ScrapCore(string url)
@@ -22,7 +22,6 @@ namespace ScrapEra.ScrapEngine
             StartScrape();
         }
 
-        List<string> Links = new List<string>();
         public List<string> ParagraphText { get; set; }
         public string Url { get; set; }
 
@@ -70,14 +69,14 @@ namespace ScrapEra.ScrapEngine
                 .Select(div => div.InnerHtml).ToList();
         }
 
-        public List<String> GetAllLinks()
+        public List<string> GetAllLinks()
         {
-            int linkCount = _doc.DocumentNode.SelectNodes("//a").Count;
+            var linkCount = _doc.DocumentNode.SelectNodes("//a").Count;
             var links = _doc.DocumentNode.SelectNodes("//a");
-            for (int i = 0; i < linkCount; ++i)
+            for (var i = 0; i < linkCount; ++i)
             {
                 if (Regex.IsMatch(links[i].GetAttributeValue("href", links[i].OuterHtml),
-                        @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
+                    @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
                 {
                     Links.Add(links[i].GetAttributeValue("href", links[i].OuterHtml));
                 }

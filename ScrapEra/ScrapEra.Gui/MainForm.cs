@@ -18,7 +18,7 @@ namespace ScrapEra.Gui
             InitializeComponent();
             _bs.DataSource = Logger.LogList;
             lstLogs.DataSource = _bs;
-            PeriodicTaskFactory.Start(() => { _bs.ResetBindings(false);}, 2000, maxIterations: 10);
+            PeriodicTaskFactory.Start(() => { _bs.ResetBindings(false); }, 2000, maxIterations: 10);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace ScrapEra.Gui
             FileDialog dialog = new SaveFileDialog();
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                File.WriteAllLines(dialog.FileName, lstLogs.Items.OfType<String>());
+                File.WriteAllLines(dialog.FileName, lstLogs.Items.OfType<string>());
             }
         }
     }

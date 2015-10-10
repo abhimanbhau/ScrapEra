@@ -1,7 +1,5 @@
-﻿using System;
-using ScrapEra.OutputProcessor;
+﻿using ScrapEra.OutputProcessor;
 using ScrapEra.ScrapEngine;
-using ScrapEra.Utils;
 
 namespace ScrapEra.Tests
 {
@@ -17,7 +15,7 @@ namespace ScrapEra.Tests
             //    Console.WriteLine(PageLanguageDetection.
             //        GetContentLanguage(string.Join(" ", core.ParagraphText.ToArray())));
             //}
-            ScrapCore core = new
+            var core = new
                 ScrapCore("https://crunchprep.com/gre/2014/101-high-frequency-gre-words");
             PdfGenerator.GeneratePdfSingleDataType("101",
                 "Crunchprep list", core.GetElementsByXpath("//p[not(@id) and not(@class)]"));
