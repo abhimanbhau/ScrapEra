@@ -43,5 +43,10 @@ namespace ScrapEra.Gui
                 File.WriteAllLines(dialog.FileName, lstLogs.Items.OfType<string>());
             }
         }
+
+        private void btnLoadCleanReader_Click(object sender, EventArgs e)
+        {
+            webCleanReader.Navigate(txtCleanReaderUrl.Text);
+        }
     }
 }

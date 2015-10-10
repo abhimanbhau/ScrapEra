@@ -92,6 +92,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScrapEra.CleanReader\ScrapEra.CleanReader.csproj">
+      <Project>{17c56878-d4b9-4b9d-8bc9-bac50567160a}</Project>
+      <Name>ScrapEra.CleanReader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScrapEra.OutputProcessor\ScrapEra.OutputProcessor.csproj">
       <Project>{559e2242-4f8f-43b9-b57b-0d4d6435e443}</Project>
       <Name>ScrapEra.OutputProcessor</Name>

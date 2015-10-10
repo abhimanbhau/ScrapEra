@@ -37,28 +37,42 @@
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.btnClear = new MetroFramework.Controls.MetroButton();
             this.lstLogs = new System.Windows.Forms.ListBox();
+            this.tabAbout = new MetroFramework.Controls.MetroTabPage();
+            this.txtAbout = new MetroFramework.Controls.MetroTextBox();
             this.tabDashboard = new MetroFramework.Controls.MetroTabPage();
             this.tabHome = new MetroFramework.Controls.MetroTabPage();
             this.tabLocalScraping = new MetroFramework.Controls.MetroTabPage();
-            this.tabAbout = new MetroFramework.Controls.MetroTabPage();
-            this.txtAbout = new MetroFramework.Controls.MetroTextBox();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.btnCleanReaderConfigure = new MetroFramework.Controls.MetroButton();
+            this.btnCleanReaderToTxt = new MetroFramework.Controls.MetroButton();
+            this.btnCleanReaderToHtml = new MetroFramework.Controls.MetroButton();
+            this.btnCleanReaderToPdf = new MetroFramework.Controls.MetroButton();
+            this.webCleanReader = new System.Windows.Forms.WebBrowser();
+            this.btnLoadCleanReader = new MetroFramework.Controls.MetroButton();
+            this.txtCleanReaderUrl = new MetroFramework.Controls.MetroTextBox();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.metroTabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.tabAbout.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
+            this.metroTabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.tabDashboard);
             this.metroTabControl1.Controls.Add(this.tabDebug);
             this.metroTabControl1.Controls.Add(this.tabAbout);
+            this.metroTabControl1.Controls.Add(this.tabDashboard);
             this.metroTabControl1.Controls.Add(this.tabHome);
             this.metroTabControl1.Controls.Add(this.tabLocalScraping);
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
+            this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 4;
+            this.metroTabControl1.SelectedIndex = 6;
             this.metroTabControl1.Size = new System.Drawing.Size(720, 405);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -165,6 +179,59 @@
             this.lstLogs.Size = new System.Drawing.Size(683, 288);
             this.lstLogs.TabIndex = 2;
             // 
+            // tabAbout
+            // 
+            this.tabAbout.Controls.Add(this.txtAbout);
+            this.tabAbout.HorizontalScrollbarBarColor = true;
+            this.tabAbout.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabAbout.HorizontalScrollbarSize = 10;
+            this.tabAbout.Location = new System.Drawing.Point(4, 38);
+            this.tabAbout.Name = "tabAbout";
+            this.tabAbout.Size = new System.Drawing.Size(712, 363);
+            this.tabAbout.TabIndex = 3;
+            this.tabAbout.Text = "About";
+            this.tabAbout.VerticalScrollbarBarColor = true;
+            this.tabAbout.VerticalScrollbarHighlightOnWheel = false;
+            this.tabAbout.VerticalScrollbarSize = 10;
+            // 
+            // txtAbout
+            // 
+            this.txtAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtAbout.CustomButton.Image = null;
+            this.txtAbout.CustomButton.Location = new System.Drawing.Point(364, 2);
+            this.txtAbout.CustomButton.Name = "";
+            this.txtAbout.CustomButton.Size = new System.Drawing.Size(343, 343);
+            this.txtAbout.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtAbout.CustomButton.TabIndex = 1;
+            this.txtAbout.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtAbout.CustomButton.UseSelectable = true;
+            this.txtAbout.CustomButton.Visible = false;
+            this.txtAbout.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtAbout.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
+            this.txtAbout.Lines = new string[] {
+        "metroTextBox1"};
+            this.txtAbout.Location = new System.Drawing.Point(3, 12);
+            this.txtAbout.MaxLength = 32767;
+            this.txtAbout.Multiline = true;
+            this.txtAbout.Name = "txtAbout";
+            this.txtAbout.PasswordChar = '\0';
+            this.txtAbout.ReadOnly = true;
+            this.txtAbout.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtAbout.SelectedText = "";
+            this.txtAbout.SelectionLength = 0;
+            this.txtAbout.SelectionStart = 0;
+            this.txtAbout.Size = new System.Drawing.Size(710, 348);
+            this.txtAbout.TabIndex = 2;
+            this.txtAbout.Text = "metroTextBox1";
+            this.txtAbout.UseSelectable = true;
+            this.txtAbout.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtAbout.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // tabDashboard
             // 
             this.tabDashboard.HorizontalScrollbarBarColor = true;
@@ -207,55 +274,150 @@
             this.tabLocalScraping.VerticalScrollbarHighlightOnWheel = false;
             this.tabLocalScraping.VerticalScrollbarSize = 10;
             // 
-            // tabAbout
+            // metroTabPage1
             // 
-            this.tabAbout.Controls.Add(this.txtAbout);
-            this.tabAbout.HorizontalScrollbarBarColor = true;
-            this.tabAbout.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabAbout.HorizontalScrollbarSize = 10;
-            this.tabAbout.Location = new System.Drawing.Point(4, 38);
-            this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(712, 363);
-            this.tabAbout.TabIndex = 3;
-            this.tabAbout.Text = "About";
-            this.tabAbout.VerticalScrollbarBarColor = true;
-            this.tabAbout.VerticalScrollbarHighlightOnWheel = false;
-            this.tabAbout.VerticalScrollbarSize = 10;
+            this.metroTabPage1.Controls.Add(this.btnCleanReaderConfigure);
+            this.metroTabPage1.Controls.Add(this.btnCleanReaderToTxt);
+            this.metroTabPage1.Controls.Add(this.btnCleanReaderToHtml);
+            this.metroTabPage1.Controls.Add(this.btnCleanReaderToPdf);
+            this.metroTabPage1.Controls.Add(this.webCleanReader);
+            this.metroTabPage1.Controls.Add(this.btnLoadCleanReader);
+            this.metroTabPage1.Controls.Add(this.txtCleanReaderUrl);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(712, 363);
+            this.metroTabPage1.TabIndex = 5;
+            this.metroTabPage1.Text = "Clean Reader";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // txtAbout
+            // btnCleanReaderConfigure
+            // 
+            this.btnCleanReaderConfigure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanReaderConfigure.Location = new System.Drawing.Point(608, 233);
+            this.btnCleanReaderConfigure.Name = "btnCleanReaderConfigure";
+            this.btnCleanReaderConfigure.Size = new System.Drawing.Size(101, 55);
+            this.btnCleanReaderConfigure.TabIndex = 8;
+            this.btnCleanReaderConfigure.Text = "Configure";
+            this.btnCleanReaderConfigure.UseSelectable = true;
+            // 
+            // btnCleanReaderToTxt
+            // 
+            this.btnCleanReaderToTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanReaderToTxt.Location = new System.Drawing.Point(608, 172);
+            this.btnCleanReaderToTxt.Name = "btnCleanReaderToTxt";
+            this.btnCleanReaderToTxt.Size = new System.Drawing.Size(101, 55);
+            this.btnCleanReaderToTxt.TabIndex = 7;
+            this.btnCleanReaderToTxt.Text = "ToTXT";
+            this.btnCleanReaderToTxt.UseSelectable = true;
+            // 
+            // btnCleanReaderToHtml
+            // 
+            this.btnCleanReaderToHtml.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanReaderToHtml.Location = new System.Drawing.Point(608, 111);
+            this.btnCleanReaderToHtml.Name = "btnCleanReaderToHtml";
+            this.btnCleanReaderToHtml.Size = new System.Drawing.Size(101, 55);
+            this.btnCleanReaderToHtml.TabIndex = 6;
+            this.btnCleanReaderToHtml.Text = "ToHTML";
+            this.btnCleanReaderToHtml.UseSelectable = true;
+            // 
+            // btnCleanReaderToPdf
+            // 
+            this.btnCleanReaderToPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanReaderToPdf.Location = new System.Drawing.Point(608, 50);
+            this.btnCleanReaderToPdf.Name = "btnCleanReaderToPdf";
+            this.btnCleanReaderToPdf.Size = new System.Drawing.Size(101, 55);
+            this.btnCleanReaderToPdf.TabIndex = 5;
+            this.btnCleanReaderToPdf.Text = "ToPDF";
+            this.btnCleanReaderToPdf.UseSelectable = true;
+            // 
+            // webCleanReader
+            // 
+            this.webCleanReader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webCleanReader.Location = new System.Drawing.Point(3, 50);
+            this.webCleanReader.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webCleanReader.Name = "webCleanReader";
+            this.webCleanReader.Size = new System.Drawing.Size(599, 310);
+            this.webCleanReader.TabIndex = 4;
+            // 
+            // btnLoadCleanReader
+            // 
+            this.btnLoadCleanReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadCleanReader.Location = new System.Drawing.Point(608, 3);
+            this.btnLoadCleanReader.Name = "btnLoadCleanReader";
+            this.btnLoadCleanReader.Size = new System.Drawing.Size(101, 30);
+            this.btnLoadCleanReader.TabIndex = 3;
+            this.btnLoadCleanReader.Text = "Load";
+            this.btnLoadCleanReader.UseSelectable = true;
+            this.btnLoadCleanReader.Click += new System.EventHandler(this.btnLoadCleanReader_Click);
+            // 
+            // txtCleanReaderUrl
+            // 
+            this.txtCleanReaderUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
+            this.txtCleanReaderUrl.CustomButton.Image = null;
+            this.txtCleanReaderUrl.CustomButton.Location = new System.Drawing.Point(571, 2);
+            this.txtCleanReaderUrl.CustomButton.Name = "";
+            this.txtCleanReaderUrl.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtCleanReaderUrl.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtCleanReaderUrl.CustomButton.TabIndex = 1;
+            this.txtCleanReaderUrl.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtCleanReaderUrl.CustomButton.UseSelectable = true;
+            this.txtCleanReaderUrl.CustomButton.Visible = false;
+            this.txtCleanReaderUrl.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtCleanReaderUrl.Lines = new string[0];
+            this.txtCleanReaderUrl.Location = new System.Drawing.Point(3, 3);
+            this.txtCleanReaderUrl.MaxLength = 32767;
+            this.txtCleanReaderUrl.Name = "txtCleanReaderUrl";
+            this.txtCleanReaderUrl.PasswordChar = '\0';
+            this.txtCleanReaderUrl.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCleanReaderUrl.SelectedText = "";
+            this.txtCleanReaderUrl.SelectionLength = 0;
+            this.txtCleanReaderUrl.SelectionStart = 0;
+            this.txtCleanReaderUrl.Size = new System.Drawing.Size(599, 30);
+            this.txtCleanReaderUrl.TabIndex = 2;
+            this.txtCleanReaderUrl.UseSelectable = true;
+            this.txtCleanReaderUrl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtCleanReaderUrl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            this.txtAbout.CustomButton.Image = null;
-            this.txtAbout.CustomButton.Location = new System.Drawing.Point(364, 2);
-            this.txtAbout.CustomButton.Name = "";
-            this.txtAbout.CustomButton.Size = new System.Drawing.Size(343, 343);
-            this.txtAbout.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtAbout.CustomButton.TabIndex = 1;
-            this.txtAbout.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtAbout.CustomButton.UseSelectable = true;
-            this.txtAbout.CustomButton.Visible = false;
-            this.txtAbout.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtAbout.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
-            this.txtAbout.Lines = new string[] {
-        "metroTextBox1"};
-            this.txtAbout.Location = new System.Drawing.Point(3, 12);
-            this.txtAbout.MaxLength = 32767;
-            this.txtAbout.Multiline = true;
-            this.txtAbout.Name = "txtAbout";
-            this.txtAbout.PasswordChar = '\0';
-            this.txtAbout.ReadOnly = true;
-            this.txtAbout.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtAbout.SelectedText = "";
-            this.txtAbout.SelectionLength = 0;
-            this.txtAbout.SelectionStart = 0;
-            this.txtAbout.Size = new System.Drawing.Size(710, 348);
-            this.txtAbout.TabIndex = 2;
-            this.txtAbout.Text = "metroTextBox1";
-            this.txtAbout.UseSelectable = true;
-            this.txtAbout.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtAbout.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // metroTabPage2
+            // 
+            this.metroTabPage2.Controls.Add(this.tableLayoutPanel1);
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(712, 363);
+            this.metroTabPage2.TabIndex = 6;
+            this.metroTabPage2.Text = "Settings";
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(712, 363);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -263,19 +425,22 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackImage = ((System.Drawing.Image)(resources.GetObject("$this.BackImage")));
-            this.BackImagePadding = new System.Windows.Forms.Padding(230, 10, 0, 0);
+            this.BackImagePadding = new System.Windows.Forms.Padding(430, 10, 0, 0);
             this.BackMaxSize = 50;
             this.ClientSize = new System.Drawing.Size(760, 485);
             this.Controls.Add(this.metroTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "ScrapEra";
+            this.Text = "ScrapEra : Web Scraping Suite";
             this.TransparencyKey = System.Drawing.Color.SkyBlue;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.tabDebug.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
             this.tabAbout.ResumeLayout(false);
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -295,6 +460,16 @@
         private MetroFramework.Controls.MetroButton btnSave;
         private MetroFramework.Controls.MetroButton btnClear;
         private MetroFramework.Controls.MetroTextBox txtAbout;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private MetroFramework.Controls.MetroButton btnLoadCleanReader;
+        private MetroFramework.Controls.MetroTextBox txtCleanReaderUrl;
+        private System.Windows.Forms.WebBrowser webCleanReader;
+        private MetroFramework.Controls.MetroButton btnCleanReaderConfigure;
+        private MetroFramework.Controls.MetroButton btnCleanReaderToTxt;
+        private MetroFramework.Controls.MetroButton btnCleanReaderToHtml;
+        private MetroFramework.Controls.MetroButton btnCleanReaderToPdf;
+        private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 
 
 

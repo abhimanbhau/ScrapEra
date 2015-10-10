@@ -12,18 +12,13 @@ namespace ScrapEra.CleanReader
         private static readonly Encoding DefaultFallbackEncoding = Encoding.UTF8;
         private readonly WebClientWithCookieContainer _webClient;
 
-        public UrlGetter(Encoding fallbackEncoding)
+        public UrlGetter()
         {
             _webClient = new WebClientWithCookieContainer();
             _webClient.Headers.Add("User-Agent",
                 Constants.UserAgentString);
             _webClient.Headers.Add("Accept", Constants.WebContentMimeInfo);
             _webClient.Headers.Add("Accept-Encoding", Constants.WebCompressionAlgorithms);
-        }
-
-        public UrlGetter()
-            : this(null)
-        {
         }
 
         public string Fetch(string url)
@@ -68,12 +63,6 @@ namespace ScrapEra.CleanReader
             return Encoding.UTF8.GetString(responseBytes);
         }
 
-        private enum CompressionAlgorithm
-        {
-            GZip,
-            Deflate
-        }
-
         private static byte[] Decompress(byte[] responseBytes, CompressionAlgorithm compressionAlgorithm)
         {
             Stream decompressingStream;
@@ -109,6 +98,12 @@ namespace ScrapEra.CleanReader
             {
                 decompressingStream.Close();
             }
+        }
+
+        private enum CompressionAlgorithm
+        {
+            GZip,
+            Deflate
         }
     }
 }
