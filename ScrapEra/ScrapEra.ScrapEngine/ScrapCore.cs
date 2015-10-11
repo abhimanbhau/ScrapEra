@@ -10,14 +10,14 @@ namespace ScrapEra.ScrapEngine
 {
     public class ScrapCore
     {
-        private readonly List<string> Links = new List<string>();
+        private readonly List<string> _links;
         private HtmlDocument _doc;
 
         public ScrapCore(string url)
         {
             Url = url;
             Logger.LogI(string.Format("ScrapCore -> Initialized crawler with URL='{0}'", url));
-            Links = new List<string>();
+            _links = new List<string>();
             ParagraphText = new List<string>();
             StartScrape();
         }
@@ -30,9 +30,10 @@ namespace ScrapEra.ScrapEngine
             try
             {
                 Logger.LogI("StartScrape -> Initialized crawler with URL='" + Url + "'");
-                var docUrl = new HtmlWeb();
-                docUrl.UserAgent =
-                    "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:42.0) Gecko/20100101 Firefox/42.0";
+                var docUrl = new HtmlWeb
+                {
+                    UserAgent = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:42.0) Gecko/20100101 Firefox/42.0"
+                };
                 _doc = docUrl.Load(Url);
                 if (docUrl.StatusCode != HttpStatusCode.OK)
                 {
@@ -78,10 +79,10 @@ namespace ScrapEra.ScrapEngine
                 if (Regex.IsMatch(links[i].GetAttributeValue("href", links[i].OuterHtml),
                     @"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$"))
                 {
-                    Links.Add(links[i].GetAttributeValue("href", links[i].OuterHtml));
+                    _links.Add(links[i].GetAttributeValue("href", links[i].OuterHtml));
                 }
             }
-            return Links;
+            return _links;
         }
 
         public List<string> GetDivisionById(string idName)

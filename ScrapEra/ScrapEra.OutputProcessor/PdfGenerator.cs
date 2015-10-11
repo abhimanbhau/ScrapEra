@@ -15,7 +15,7 @@ namespace ScrapEra.OutputProcessor
             {
                 Logger.LogI("GeneratePDF -> " + filePath);
                 var doc = new Document(PageSize.A3, 36, 72, 72, 144);
-                var writer = PdfWriter.GetInstance(doc,
+                PdfWriter.GetInstance(doc,
                     new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None));
                 doc.Open();
                 doc.AddTitle(title);

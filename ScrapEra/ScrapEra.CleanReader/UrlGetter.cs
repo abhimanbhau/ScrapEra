@@ -9,7 +9,6 @@ namespace ScrapEra.CleanReader
     public class UrlGetter
     {
         private const int BufferSize = 8192;
-        private static readonly Encoding DefaultFallbackEncoding = Encoding.UTF8;
         private readonly WebClientWithCookieContainer _webClient;
 
         public UrlGetter()

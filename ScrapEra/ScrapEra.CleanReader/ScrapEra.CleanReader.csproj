@@ -67,7 +67,7 @@
     <EmbeddedResource Include="Resources\readability.css" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ScrapEra.css" />
+    <EmbeddedResource Include="Resources\ScrapEra.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

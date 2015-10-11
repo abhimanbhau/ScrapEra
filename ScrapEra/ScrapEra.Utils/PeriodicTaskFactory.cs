@@ -77,6 +77,7 @@ namespace ScrapEra.Utils
                         }
                         catch
                         {
+                            Console.WriteLine();
                         }
                         stopWatch.Stop();
                     }

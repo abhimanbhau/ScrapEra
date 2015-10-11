@@ -5,7 +5,6 @@
         private readonly SgmlDomSerializerFactory _sgmlDomSerializer;
         private readonly CleanReaderCore _transcoder;
         private readonly UrlGetter _urlFetcher;
-        private int _curPageNum;
 
         public CleanReaderWeb(CleanReaderCore transcoder, UrlGetter urlFetcher)
         {
