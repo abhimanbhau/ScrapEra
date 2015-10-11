@@ -52,6 +52,7 @@
             this.txtCleanReaderUrl = new MetroFramework.Controls.MetroTextBox();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCleanReaderHelp = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -64,15 +65,15 @@
             // 
             this.metroTabControl1.Controls.Add(this.tabDebug);
             this.metroTabControl1.Controls.Add(this.tabAbout);
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.tabDashboard);
             this.metroTabControl1.Controls.Add(this.tabHome);
             this.metroTabControl1.Controls.Add(this.tabLocalScraping);
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 6;
+            this.metroTabControl1.SelectedIndex = 5;
             this.metroTabControl1.Size = new System.Drawing.Size(720, 405);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -276,6 +277,7 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.btnCleanReaderHelp);
             this.metroTabPage1.Controls.Add(this.btnCleanReaderConfigure);
             this.metroTabPage1.Controls.Add(this.btnCleanReaderToTxt);
             this.metroTabPage1.Controls.Add(this.btnCleanReaderToHtml);
@@ -419,6 +421,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(712, 363);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
+            // btnCleanReaderHelp
+            // 
+            this.btnCleanReaderHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanReaderHelp.Location = new System.Drawing.Point(608, 294);
+            this.btnCleanReaderHelp.Name = "btnCleanReaderHelp";
+            this.btnCleanReaderHelp.Size = new System.Drawing.Size(101, 55);
+            this.btnCleanReaderHelp.TabIndex = 9;
+            this.btnCleanReaderHelp.Text = "Help";
+            this.btnCleanReaderHelp.UseSelectable = true;
+            this.btnCleanReaderHelp.Click += new System.EventHandler(this.btnCleanReaderHelp_Click);
+            // 
             // MainForm
             // 
             this.ApplyImageInvert = true;
@@ -470,6 +483,7 @@
         private MetroFramework.Controls.MetroButton btnCleanReaderToPdf;
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private MetroFramework.Controls.MetroButton btnCleanReaderHelp;
 
 
 

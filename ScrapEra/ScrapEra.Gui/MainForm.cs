@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using ScrapEra.CleanReader;
 using ScrapEra.Gui.Properties;
 using ScrapEra.ScrapLogger;
 using ScrapEra.Utils;
@@ -46,7 +47,14 @@ namespace ScrapEra.Gui
 
         private void btnLoadCleanReader_Click(object sender, EventArgs e)
         {
-            webCleanReader.Navigate(txtCleanReaderUrl.Text);
+            var tr = new CleanReaderWeb();
+            bool success;
+            var stuff = tr.Transcode(txtCleanReaderUrl.Text, out success);
+            webCleanReader.DocumentText = stuff;
+        }
+
+        private void btnCleanReaderHelp_Click(object sender, EventArgs e)
+        {
         }
     }
 }

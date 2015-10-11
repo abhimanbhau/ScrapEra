@@ -1,0 +1,29 @@
+﻿body {
+    font-family: Georgia, 'Times New Roman', Times, sans;
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+h1 { font-size: 2.747em; }
+
+h2 { font-size: 0.874em; }
+
+h3 { font-size: 1.229em; }
+
+#mainContent {
+    margin: auto;
+    max-width: 60em;
+    padding: 0 1em;
+}
+
+@media screen and (max-width: 25em) {
+    body { font-size: 90%; }
+}
+
+#mainContent a {
+    color: #6dd4b1;
+    text-decoration: none;
+    transition: all 0.2s linear;
+}
+
+#mainContent a:hover, a:focus { color: #357099; }

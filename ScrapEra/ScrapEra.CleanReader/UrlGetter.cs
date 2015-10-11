@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ScrapEra.CleanReader
 {
-    internal class UrlGetter
+    public class UrlGetter
     {
         private const int BufferSize = 8192;
         private static readonly Encoding DefaultFallbackEncoding = Encoding.UTF8;

@@ -14,7 +14,7 @@ namespace ScrapEra.OutputProcessor
             try
             {
                 Logger.LogI("GeneratePDF -> " + filePath);
-                var doc = new Document(PageSize.A4, 36, 72, 108, 180);
+                var doc = new Document(PageSize.A3, 36, 72, 72, 144);
                 var writer = PdfWriter.GetInstance(doc,
                     new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None));
                 doc.Open();
@@ -55,7 +55,7 @@ namespace ScrapEra.OutputProcessor
                     cb.SetColorFill(BaseColor.BLACK);
                     cb.BeginText();
                     cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER,
-                        "(c)2015 Abhimanbhau Kolte", rect.Width/2, rect.Height/2, 45f);
+                        "(c)2015 ScrapEra", rect.Width/2, rect.Height/2, 45f);
                     cb.EndText();
                     cb.EndLayer();
                 }

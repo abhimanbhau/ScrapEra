@@ -96,5 +96,16 @@ namespace ScrapEra.ScrapEngine
             Logger.LogI(Url + " -> GetElementsByXpath => " + xpath);
             return _doc.DocumentNode.SelectNodes(xpath).Select(elem => elem.InnerHtml).ToList();
         }
+
+        public IEnumerable<HtmlNode> GetNodes(string xpath)
+        {
+            var children = _doc.DocumentNode.SelectNodes(xpath);
+            var nodes = new List<HtmlNode>();
+            foreach (var stuff in children)
+            {
+                nodes.AddRange(stuff.ChildNodes);
+            }
+            return nodes;
+        }
     }
 }
