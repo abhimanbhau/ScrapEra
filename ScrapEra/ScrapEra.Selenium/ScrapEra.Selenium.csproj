@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{559E2242-4F8F-43B9-B57B-0D4D6435E443}</ProjectGuid>
+    <ProjectGuid>{099627E9-7150-43C7-9112-5EACCCD32618}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScrapEra.OutputProcessor</RootNamespace>
-    <AssemblyName>ScrapEra.OutputProcessor</AssemblyName>
+    <RootNamespace>ScrapEra.Selenium</RootNamespace>
+    <AssemblyName>ScrapEra.Selenium</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="itextsharp">
-      <HintPath>..\packages\iTextSharp.5.5.7\lib\itextsharp.dll</HintPath>
+    <Reference Include="Selenium.WebDriverBackedSelenium">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\Selenium.WebDriverBackedSelenium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -40,21 +40,31 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.Selenium.Core">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\ThoughtWorks.Selenium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileOutput.cs" />
-    <Compile Include="ImageOutput.cs" />
-    <Compile Include="PdfGenerator.cs" />
+    <Compile Include="ScrapEraSeleniumGenericException.cs" />
+    <Compile Include="SeleniumCoreIE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScrapEra.ScrapLogger\ScrapEra.ScrapLogger.csproj">
-      <Project>{9b8977ff-9336-4d74-875b-aab7b7458c95}</Project>
-      <Name>ScrapEra.ScrapLogger</Name>
-    </ProjectReference>
+    <Content Include="IEDriverServer.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\ScrapEra.OutputProcessor\ScrapEra.OutputProcessor.csproj">
+      <Project>{559e2242-4f8f-43b9-b57b-0d4d6435e443}</Project>
+      <Name>ScrapEra.OutputProcessor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

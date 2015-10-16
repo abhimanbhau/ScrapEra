@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
 using ScrapEra.OutputProcessor;
-using ScrapEra.ScrapEngine;
+using ScrapEra.Selenium;
 
 namespace ScrapEra.Tests
 {
@@ -25,23 +25,61 @@ namespace ScrapEra.Tests
                 "Crunchprep list", core.GetElementsByXpath("//p[not(@id) and not(@class)]"));
             */
 
-            var core =
-                new ScrapCore(
-                    "https://docs.google.com/spreadsheets/d/15ZDmjlo4HEHrfR6N0TAVdP1_oxWyVxpIaPgdhV0880E/htmlview?pli=1&sle=true");
-            var data = new List<string>();
-            var table = core.GetNodes("//html/body/div[2]/div/div/table/tbody");
-            foreach (var row in table)
-            {
-                var singleRow = new StringBuilder();
-                foreach (var col in row.ChildNodes)
-                {
-                    var t = (col.InnerText.Length > 0) ? col.InnerText : "\t";
-                    singleRow.Append(t + "|");
-                }
-                data.Add(singleRow.ToString());
-            }
+            //var core =
+            //    new ScrapCore(
+            //        "https://docs.google.com/spreadsheets/d/15ZDmjlo4HEHrfR6N0TAVdP1_oxWyVxpIaPgdhV0880E/htmlview?pli=1&sle=true");
+            //var data = new List<string>();
+            //var table = core.GetNodes("//html/body/div[2]/div/div/table/tbody");
+            //foreach (var row in table)
+            //{
+            //    var singleRow = new StringBuilder();
+            //    foreach (var col in row.ChildNodes)
+            //    {
+            //        var t = (col.InnerText.Length > 0) ? col.InnerText : "\t";
+            //        singleRow.Append(t + "|");
+            //    }
+            //    data.Add(singleRow.ToString());
+            //}
 
-            PdfGenerator.GeneratePdfSingleDataType("AdmitReject", "Univlist", data);
+            //PdfGenerator.GeneratePdfSingleDataType("AdmitReject", "Univlist", data);
+
+            var termsToSearch = new List<string>
+            {
+                //"Abhiman Kolte",
+                //"Sachin Tendulkar",
+                //"Is Pluto a planet?",
+                //"Roshan Karande",
+                //"Shivam Gupta",
+                //"Shivaji Maharaj",
+                //"India",
+                "Carnegie Mellon University",
+                "NCSU",
+                "UPitt",
+                "UNCC",
+                "IITK",
+                "VIT Pune"
+                //"Latest Movies",
+                //"Facebook news",
+                //"Latest mobiles",
+                //"latest news",
+                //"hot topics"
+            };
+            const string url = "http://www.google.com";
+            long timerStart = 0;
+            var driver = SeleniumCoreIE.GetIeDriverInstance(url);
+            driver.StartTimer(ref timerStart);
+            driver.SetDefaultElementSearchTimeout(10);
+            var dataMined = new List<string>();
+            foreach (var search in termsToSearch)
+            {
+                driver.Navigate().GoToUrl(url);
+                driver.FindElementByClassName("gsfi").SendKeys(search);
+                driver.FindElementByName("btnK").Click();
+                dataMined.Add(driver.FindElementById("ires").Text);
+            }
+            PdfGenerator.GeneratePdfSingleDataType("google.pdf", "miner", dataMined);
+            Console.WriteLine(driver.GetRunningTime(ref timerStart));
+            driver.SafeCloseDriver();
         }
     }
 }

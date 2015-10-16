@@ -48,7 +48,6 @@
     <Compile Include="CleanReaderCore.cs" />
     <Compile Include="CleanReaderWeb.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="DocumentBehaviour.cs" />
     <Compile Include="DomSerializationParams.cs" />
     <Compile Include="ElementTraveseHelper.cs" />
     <Compile Include="ForEachActionExtension.cs" />

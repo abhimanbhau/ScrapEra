@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.Gui", "ScrapEra.Gu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.CleanReader", "ScrapEra.CleanReader\ScrapEra.CleanReader.csproj", "{17C56878-D4B9-4B9D-8BC9-BAC50567160A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.Selenium", "ScrapEra.Selenium\ScrapEra.Selenium.csproj", "{099627E9-7150-43C7-9112-5EACCCD32618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{17C56878-D4B9-4B9D-8BC9-BAC50567160A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17C56878-D4B9-4B9D-8BC9-BAC50567160A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17C56878-D4B9-4B9D-8BC9-BAC50567160A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{099627E9-7150-43C7-9112-5EACCCD32618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{099627E9-7150-43C7-9112-5EACCCD32618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{099627E9-7150-43C7-9112-5EACCCD32618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{099627E9-7150-43C7-9112-5EACCCD32618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

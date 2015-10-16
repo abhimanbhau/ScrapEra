@@ -16,12 +16,10 @@ namespace ScrapEra.CleanReader
         {
             var webRequest = base.GetWebRequest(address);
             var httpWebRequest = webRequest as HttpWebRequest;
-
             if (httpWebRequest != null)
             {
                 httpWebRequest.CookieContainer = _cookieContainer;
             }
-
             return webRequest;
         }
     }

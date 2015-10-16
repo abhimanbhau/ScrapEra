@@ -46,23 +46,6 @@ namespace ScrapEra.CleanReader
             return (titleElement.Value).Trim();
         }
 
-        public static XElement GetElementById(this XDocument document, string id)
-        {
-            if (document == null)
-            {
-                throw new ArgumentNullException("document");
-            }
-            if (string.IsNullOrEmpty(id))
-            {
-                throw new ArgumentNullException("id");
-            }
-            return
-                (from element in document.Descendants()
-                    let idAttribute = element.Attribute("id")
-                    where idAttribute != null && idAttribute.Value == id
-                    select element).SingleOrDefault();
-        }
-
         public static string GetId(this XElement element)
         {
             return element.GetAttributeValue("id", "");
@@ -81,11 +64,6 @@ namespace ScrapEra.CleanReader
         public static void SetClass(this XElement element, string @class)
         {
             element.SetAttributeValue("class", @class);
-        }
-
-        public static string GetStyle(this XElement element)
-        {
-            return element.GetAttributeValue("style", "");
         }
 
         public static void SetStyle(this XElement element, string style)
@@ -109,62 +87,6 @@ namespace ScrapEra.CleanReader
                 : defaultValue;
         }
 
-        public static void SetAttributeValue(this XElement element, string attributeName, string value)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException("element");
-            }
-            if (string.IsNullOrEmpty(attributeName))
-            {
-                throw new ArgumentNullException("attributeName");
-            }
-            if (value == null)
-            {
-                var attribute = element.Attribute(attributeName);
-                if (attribute != null)
-                {
-                    attribute.Remove();
-                }
-            }
-            else
-            {
-                element.SetAttributeValue(attributeName, value);
-            }
-        }
-
-        public static string GetAttributesString(this XElement element, string separator)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException("element");
-            }
-            if (separator == null)
-            {
-                throw new ArgumentNullException("separator");
-            }
-            var resultSb = new StringBuilder();
-            var isFirst = true;
-            element.Attributes().Aggregate(
-                resultSb,
-                (sb, attribute) =>
-                {
-                    var attributeValue = attribute.Value;
-                    if (string.IsNullOrEmpty(attributeValue))
-                    {
-                        return sb;
-                    }
-                    if (!isFirst)
-                    {
-                        resultSb.Append(separator);
-                    }
-                    isFirst = false;
-                    sb.Append(attribute.Value);
-                    return sb;
-                });
-            return resultSb.ToString();
-        }
-
         public static string GetInnerHtml(this XContainer container)
         {
             if (container == null)
@@ -181,13 +103,9 @@ namespace ScrapEra.CleanReader
 
         public static void SetInnerHtml(this XElement element, string html)
         {
-            if (element == null)
+            if (element == null || html == null)
             {
-                throw new ArgumentNullException("element");
-            }
-            if (html == null)
-            {
-                throw new ArgumentNullException("html");
+                throw new ArgumentNullException("element" + " | " + "html");
             }
             element.RemoveAll();
             var tmpElement = new SgmlDomFactory().BuildDocument(html);
@@ -203,13 +121,9 @@ namespace ScrapEra.CleanReader
 
         public static IEnumerable<XElement> GetElementsByTagName(this XContainer container, string tagName)
         {
-            if (container == null)
+            if (container == null || string.IsNullOrEmpty(tagName))
             {
-                throw new ArgumentNullException("container");
-            }
-            if (string.IsNullOrEmpty(tagName))
-            {
-                throw new ArgumentNullException("tagName");
+                throw new ArgumentNullException("container" + " | " + "tagName");
             }
             return container.Descendants()
                 .Where(e => tagName.Equals(e.Name.LocalName, StringComparison.OrdinalIgnoreCase));
@@ -217,13 +131,9 @@ namespace ScrapEra.CleanReader
 
         public static IEnumerable<XElement> GetChildrenByTagName(this XContainer container, string tagName)
         {
-            if (container == null)
+            if (container == null || string.IsNullOrEmpty(tagName))
             {
-                throw new ArgumentNullException("container");
-            }
-            if (string.IsNullOrEmpty(tagName))
-            {
-                throw new ArgumentNullException("tagName");
+                throw new ArgumentNullException("container" + " | " + "tagName");
             }
             return container.Elements()
                 .Where(e => tagName.Equals(e.Name.LocalName, StringComparison.OrdinalIgnoreCase));

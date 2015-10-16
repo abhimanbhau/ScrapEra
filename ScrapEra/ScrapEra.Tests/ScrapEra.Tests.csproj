@@ -36,6 +36,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Selenium.WebDriverBackedSelenium">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\Selenium.WebDriverBackedSelenium.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.Selenium.Core">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\ThoughtWorks.Selenium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\..\..\..\..\Downloads\Selenium\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -61,10 +73,19 @@
       <Project>{4f1060f3-3df4-43bc-80e9-3400c75e4f27}</Project>
       <Name>ScrapEra.ScrapEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScrapEra.Selenium\ScrapEra.Selenium.csproj">
+      <Project>{099627e9-7150-43c7-9112-5eacccd32618}</Project>
+      <Name>ScrapEra.Selenium</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScrapEra.Utils\ScrapEra.Utils.csproj">
       <Project>{f31da3e4-2f1c-4e5c-a953-fbb5c99bdda7}</Project>
       <Name>ScrapEra.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IEDriverServer.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

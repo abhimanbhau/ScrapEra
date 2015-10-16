@@ -26,5 +26,22 @@ namespace ScrapEra.OutputProcessor
                             Environment.NewLine + ex.StackTrace);
             }
         }
+
+        public static void GenerateFileOutput(string filePath, string content)
+        {
+            try
+            {
+                using (var stream = new StreamWriter(filePath) {AutoFlush = true, NewLine = Environment.NewLine})
+                {
+                    stream.WriteLine(content);
+                    stream.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogE(ex.Source + " -> " + ex.Message +
+                            Environment.NewLine + ex.StackTrace);
+            }
+        }
     }
 }
