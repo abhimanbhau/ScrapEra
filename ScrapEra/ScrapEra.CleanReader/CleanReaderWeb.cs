@@ -24,7 +24,6 @@
             return DoTranscode(url, DomSerializationParams.CreateDefault(), out mainContentExtracted, out extractedTitle);
         }
 
-
         private string DoTranscode(string url, DomSerializationParams domSerializationParams,
             out bool mainContentExtracted, out string extractedTitle)
         {
@@ -33,7 +32,6 @@
             {
                 mainContentExtracted = false;
                 extractedTitle = null;
-
                 return null;
             }
             var document = _transcoder.TranscodeToXml(htmlContent, url, out mainContentExtracted, out extractedTitle);

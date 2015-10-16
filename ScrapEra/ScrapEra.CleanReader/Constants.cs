@@ -14,8 +14,6 @@
 
         public const string WebCompressionAlgorithms = "gzip,deflate";
         public const string WebContentMimeInfo = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-
-
         // CleanReader Core Constants
     }
 }

@@ -90,7 +90,6 @@ namespace ScrapEra.CleanReader
         private readonly bool _dontNormalizeSpacesInTextContent;
         private readonly bool _dontWeightClasses;
         private readonly Dictionary<XElement, float> _elementsScores;
-
         private readonly SgmlDomFactory _sgmlDomFactory;
         private readonly SgmlDomSerializerFactory _sgmlDomSerializer;
         private bool _dontStripUnlikelys;
@@ -269,7 +268,6 @@ namespace ScrapEra.CleanReader
             /* Create overlay div. */
             var overlayDiv = new XElement("div");
             overlayDiv.SetId(OverlayDivId);
-
             overlayDiv.Add(innerDiv);
             /* Clear the old HTML, insert the new content. */
             documentBody.RemoveAll();
