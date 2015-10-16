@@ -1,4 +1,5 @@
 ﻿using System;
+using ScrapEra.Utils;
 
 namespace ScrapEra.CleanReader
 {

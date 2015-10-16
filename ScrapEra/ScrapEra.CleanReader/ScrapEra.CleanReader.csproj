@@ -47,7 +47,6 @@
     <Compile Include="AttributeTransformation.cs" />
     <Compile Include="CleanReaderCore.cs" />
     <Compile Include="CleanReaderWeb.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="ElementTraveseHelper.cs" />
     <Compile Include="ForEachActionExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ScrapEra.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScrapEra.Utils\ScrapEra.Utils.csproj">
+      <Project>{f31da3e4-2f1c-4e5c-a953-fbb5c99bdda7}</Project>
+      <Name>ScrapEra.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

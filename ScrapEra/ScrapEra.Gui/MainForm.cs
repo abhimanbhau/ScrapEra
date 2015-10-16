@@ -57,22 +57,39 @@ namespace ScrapEra.Gui
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            _cleanReaderCentralThread = new Thread(CleanReaderWorker);
+            _cleanReaderCentralThread = new Thread(CleanReaderWorker) {IsBackground = true};
             _cleanReaderCentralThread.Start();
         }
 
         public void CleanReaderWorker()
         {
-            var tr = new CleanReaderWeb();
-            bool success;
-            var stuff = tr.Transcode(txtCleanReaderUrl.Text, out success);
-            webCleanReader.DocumentText = stuff;
-            CleanThread();
+            try
+            {
+                var tr = new CleanReaderWeb();
+                var stuff = tr.Transcode(txtCleanReaderUrl.Text);
+                webCleanReader.DocumentText = stuff;
+                CleanThread();
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this,
+                    ex.ToString(),
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void CleanThread()
         {
-            _cleanReaderCentralThread = null;
+            try
+            {
+                _cleanReaderCentralThread = null;
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         private void btnCleanReaderHelp_Click(object sender, EventArgs e)

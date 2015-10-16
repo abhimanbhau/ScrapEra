@@ -19,8 +19,8 @@ namespace ScrapEra.Utils
                 var response = client.Execute(request);
                 var deserializer = new JsonDeserializer();
                 var result = deserializer.Deserialize<Result>(response);
-                var detection = result.data.detections[0];
-                return detection.language;
+                var detection = result.Data.Detections[0];
+                return detection.Language;
             }
             catch (Exception ex)
             {
@@ -31,19 +31,19 @@ namespace ScrapEra.Utils
 
         public class Detection
         {
-            public string language { get; set; }
-            public bool isReliable { get; set; }
-            public float confidence { get; set; }
+            public string Language { get; set; }
+            public bool IsReliable { get; set; }
+            public float Confidence { get; set; }
         }
 
         public class ResultData
         {
-            public List<Detection> detections { get; set; }
+            public List<Detection> Detections { get; set; }
         }
 
         public class Result
         {
-            public ResultData data { get; set; }
+            public ResultData Data { get; set; }
         }
     }
 }

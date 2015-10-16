@@ -52,26 +52,20 @@ namespace ScrapEra.CleanReader
             {
                 throw new ArgumentNullException("childNodeVisitor");
             }
-
             _childNodeVisitor = childNodeVisitor;
         }
-
 
         public void Traverse(XNode node)
         {
             if (!(node is XContainer))
             {
-                throw new ApplicationException("The node must be an XContainer in order to traverse its children.");
+                throw new ApplicationException("node does not contain other nodes");
             }
-
             var childNode = ((XContainer) node).FirstNode;
-
             while (childNode != null)
             {
                 var nextChildNode = childNode.NextNode;
-
                 _childNodeVisitor(childNode);
-
                 childNode = nextChildNode;
             }
         }

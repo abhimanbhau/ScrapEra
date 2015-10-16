@@ -7,113 +7,22 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
+using ScrapEra.Utils;
 
 namespace ScrapEra.CleanReader
 {
     public class CleanReaderCore
     {
-        internal const string OverlayDivId = "readOverlay";
-        internal const string InnerDivId = "mainContent";
-        internal const string ContentDivId = "readability-content";
-        internal const string ReadabilityStyledCssClass = "readability-styled";
-        private const int MinParagraphLength = 25;
-        private const int MinInnerTextLength = 25;
-        private const int ParagraphSegmentLength = 100;
-        private const int MaxPointsForSegmentsCount = 3;
-        private const int MinSiblingParagraphLength = 80;
-        private const int MinCommaSegments = 10;
-        private const int LisCountTreshold = 100;
-        private const int MaxImagesInShortSegmentsCount = 2;
-        private const int MinInnerTextLengthInElementsWithEmbed = 75;
-        private const int ClassWeightTreshold = 25;
-        private const int MaxEmbedsCount = 1;
-        private const int MaxArticleTitleLength = 150;
-        private const int MinArticleTitleLength = 15;
-        private const int MinArticleTitleWordsCount1 = 3;
-        private const int MinArticleTitleWordsCount2 = 4;
-        private const float SiblingScoreTresholdCoefficient = 0.2f;
-        private const float MaxSiblingScoreTreshold = 10.0f;
-        private const float MaxSiblingParagraphLinksDensity = 0.25f;
-        private const float MaxHeaderLinksDensity = 0.33f;
-        private const float MaxDensityForElementsWithSmallerClassWeight = 0.2f;
-        private const float MaxDensityForElementsWithGreaterClassWeight = 0.5f;
-        private static readonly string StylesheetResourceName = "ScrapEra.CleanReader.Resources.ScrapEra.css";
-
-        private static readonly Regex UnlikelyCandidatesRegex =
-            new Regex(
-                "combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|side|sponsor|ad-break|agegate|pagination|pager|popup|tweet|twitter",
-                RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _OkMaybeItsACandidateRegex = new Regex("and|article|body|column|main|shadow",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _PositiveWeightRegex =
-            new Regex("article|body|content|entry|hentry|main|page|pagination|post|text|blog|story",
-                RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _NegativeWeightRegex =
-            new Regex(
-                "combx|comment|com-|contact|foot|footer|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|side|sponsor|shopping|tags|tool|widget|References",
-                RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _DivToPElementsRegex = new Regex("<(a|blockquote|dl|div|img|ol|p|pre|table|ul)",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _EndOfSentenceRegex = new Regex("\\.( |$)",
-            RegexOptions.Compiled | RegexOptions.Multiline);
-
-        private static readonly Regex _BreakBeforeParagraphRegex = new Regex("<br[^>]*>\\s*<p", RegexOptions.Compiled);
-        private static readonly Regex _NormalizeSpacesRegex = new Regex("\\s{2,}", RegexOptions.Compiled);
-
-        private static readonly Regex _KillBreaksRegex = new Regex("(<br\\s*\\/?>(\\s|&nbsp;?)*){1,}",
-            RegexOptions.Compiled);
-
-        private static readonly Regex _ReplaceDoubleBrsRegex = new Regex("(<br[^>]*>[ \\n\\r\\t]*){2,}",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _ArticleTitleDashRegex1 = new Regex(" [\\|\\-] ", RegexOptions.Compiled);
-        private static readonly Regex _ArticleTitleDashRegex2 = new Regex("(.*)[\\|\\-] .*", RegexOptions.Compiled);
-
-        private static readonly Regex _ArticleTitleDashRegex3 = new Regex("[^\\|\\-]*[\\|\\-](.*)",
-            RegexOptions.Compiled);
-
-        private static readonly Regex _ArticleTitleColonRegex1 = new Regex(".*:(.*)", RegexOptions.Compiled);
-        private static readonly Regex _ArticleTitleColonRegex2 = new Regex("[^:]*[:](.*)", RegexOptions.Compiled);
-
-        private static readonly Regex _LikelyParagraphDivRegex = new Regex("text|para",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _MailtoHrefRegex = new Regex("^\\s*mailto\\s*:",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        private static readonly Regex _TitleWhitespacesCleanUpRegex = new Regex("\\s+", RegexOptions.Compiled);
-        private readonly bool _dontNormalizeSpacesInTextContent;
-        private readonly bool _dontWeightClasses;
         private readonly Dictionary<XElement, float> _elementsScores;
         private readonly SgmlDomFactory _sgmlDomFactory;
-        private readonly SgmlDomSerializerFactory _sgmlDomSerializer;
-        private bool _dontStripUnlikelys;
 
-        private CleanReaderCore(bool dontStripUnlikelys, bool dontNormalizeSpacesInTextContent, bool dontWeightClasses)
+        public CleanReaderCore()
         {
-            _dontStripUnlikelys = dontStripUnlikelys;
-            _dontNormalizeSpacesInTextContent = dontNormalizeSpacesInTextContent;
-            _dontWeightClasses = dontWeightClasses;
             _sgmlDomFactory = new SgmlDomFactory();
-            _sgmlDomSerializer = new SgmlDomSerializerFactory();
             _elementsScores = new Dictionary<XElement, float>();
         }
 
-        public CleanReaderCore()
-            : this(false, false, false)
-        {
-        }
-
-        public Func<AttributeTransformationInput, AttributeTransformationResult> ImageSourceTranformer { get; set; }
-        public Func<AttributeTransformationInput, AttributeTransformationResult> AnchorHrefTranformer { get; set; }
-
-        internal XDocument TranscodeToXml(string htmlContent, string url, out bool mainContentExtracted,
-            out string extractedTitle)
+        internal XDocument TranscodeToXml(string htmlContent, string url, out string extractedTitle)
         {
             if (string.IsNullOrEmpty(htmlContent))
             {
@@ -129,7 +38,6 @@ namespace ScrapEra.CleanReader
             var articleTitleElement = ExtractArticleTitle(document);
             var articleContentElement = ExtractArticleContent(document, url);
             GlueDocument(document, articleTitleElement, articleContentElement);
-            mainContentExtracted = !articleContentElement.IsEmpty;
             extractedTitle = ExtractTitle(document);
             return document;
         }
@@ -165,7 +73,7 @@ namespace ScrapEra.CleanReader
             elementsToRemove.AddRange(anchorElements);
             RemoveElements(elementsToRemove);
             var bodyInnerHtml = documentBody.GetInnerHtml();
-            bodyInnerHtml = _ReplaceDoubleBrsRegex.Replace(bodyInnerHtml, "</p><p>");
+            bodyInnerHtml = _replaceDoubleBrsRegex.Replace(bodyInnerHtml, "</p><p>");
             documentBody.SetInnerHtml(bodyInnerHtml);
         }
 
@@ -174,20 +82,20 @@ namespace ScrapEra.CleanReader
             var documentBody = GetOrCreateBody(document);
             var documentTitle = document.GetTitle() ?? "";
             var currentTitle = documentTitle;
-            if (_ArticleTitleDashRegex1.IsMatch(currentTitle))
+            if (_articleTitleDashRegex1.IsMatch(currentTitle))
             {
-                currentTitle = _ArticleTitleDashRegex2.Replace(documentTitle, "$1");
+                currentTitle = _articleTitleDashRegex2.Replace(documentTitle, "$1");
                 if (currentTitle.Split(' ').Length < MinArticleTitleWordsCount1)
                 {
-                    currentTitle = _ArticleTitleDashRegex3.Replace(documentTitle, "$1");
+                    currentTitle = _articleTitleDashRegex3.Replace(documentTitle, "$1");
                 }
             }
             else if (currentTitle.IndexOf(": ", StringComparison.Ordinal) != -1)
             {
-                currentTitle = _ArticleTitleColonRegex1.Replace(documentTitle, "$1");
+                currentTitle = _articleTitleColonRegex1.Replace(documentTitle, "$1");
                 if (currentTitle.Split(' ').Length < MinArticleTitleWordsCount1)
                 {
-                    currentTitle = _ArticleTitleColonRegex2.Replace(documentTitle, "$1");
+                    currentTitle = _articleTitleColonRegex2.Replace(documentTitle, "$1");
                 }
             }
             else if (currentTitle.Length > MaxArticleTitleLength || currentTitle.Length < MinArticleTitleLength)
@@ -285,8 +193,8 @@ namespace ScrapEra.CleanReader
                     if (unlikelyMatchString.Length > 0
                         && !"body".Equals(elementName, StringComparison.OrdinalIgnoreCase)
                         && !"a".Equals(elementName, StringComparison.OrdinalIgnoreCase)
-                        && UnlikelyCandidatesRegex.IsMatch(unlikelyMatchString)
-                        && !_OkMaybeItsACandidateRegex.IsMatch(unlikelyMatchString))
+                        && _unlikelyCandidatesRegex.IsMatch(unlikelyMatchString)
+                        && !_okMaybeItsACandidateRegex.IsMatch(unlikelyMatchString))
                     {
                         var parentElement = element.Parent;
                         if (parentElement != null)
@@ -295,34 +203,27 @@ namespace ScrapEra.CleanReader
                         }
                         return;
                     }
-                    /* Turn all divs that don't have children block level elements into p's or replace text nodes within the div with p's. */
-                    if ("div".Equals(elementName, StringComparison.OrdinalIgnoreCase))
+
+                    if (!"div".Equals(elementName, StringComparison.OrdinalIgnoreCase)) return;
+                    if (!_divToPElementsRegex.IsMatch(element.GetInnerHtml()))
                     {
-                        if (!_DivToPElementsRegex.IsMatch(element.GetInnerHtml()))
-                        {
-                            // no block elements inside - change to p
-                            SetElementName(element, "p");
-                        }
-                        else
-                        {
-                            // replace text nodes with p's (experimental)
-                            new ChildNodesTraverser(
-                                childNode =>
+                        SetElementName(element, "p");
+                    }
+                    else
+                    {
+                        new ChildNodesTraverser(
+                            childNode =>
+                            {
+                                if (childNode.NodeType != XmlNodeType.Text
+                                    || GetInnerText(childNode).Length == 0)
                                 {
-                                    if (childNode.NodeType != XmlNodeType.Text
-                                        || GetInnerText(childNode).Length == 0)
-                                    {
-                                        return;
-                                    }
-                                    var paraElement = new XElement("p");
-                                    // note that we're not using GetInnerText() here; instead we're getting raw InnerText to preserve whitespaces
-                                    paraElement.SetInnerHtml(((XText) childNode).Value);
-                                    paraElement.SetClass(ReadabilityStyledCssClass);
-                                    paraElement.SetStyle("display: inline;");
-                                    childNode.ReplaceWith(paraElement);
+                                    return;
                                 }
-                                ).Traverse(element);
-                        }
+                                var paraElement = new XElement("p");
+                                paraElement.SetInnerHtml(((XText)childNode).Value);
+                                childNode.ReplaceWith(paraElement);
+                            }
+                            ).Traverse(element);
                     }
                 }).Traverse(rootElement);
         }
@@ -334,21 +235,16 @@ namespace ScrapEra.CleanReader
                 element =>
                 {
                     var elementName = GetElementName(element);
-                    if ("div".Equals(elementName, StringComparison.OrdinalIgnoreCase))
+                    if (elementName.Equals("div", StringComparison.OrdinalIgnoreCase))
                     {
                         var childNode = element.Nodes().SingleOrNone();
                         var childElement = childNode as XElement;
-                        if (childElement != null &&
-                            "p".Equals(GetElementName(childElement), StringComparison.OrdinalIgnoreCase))
-                        {
-                            // we have a div with a single child element that is a paragraph - let's remove the div and attach the paragraph to the div's parent
-                            var parentElement = element.Parent;
-                            if (parentElement != null)
-                            {
-                                element.AddBeforeSelf(childElement);
-                                element.Remove();
-                            }
-                        }
+                        if (childElement == null ||
+                            !GetElementName(childElement).Equals("p", StringComparison.OrdinalIgnoreCase)) return;
+                        var parentElement = element.Parent;
+                        if (parentElement == null) return;
+                        element.AddBeforeSelf(childElement);
+                        element.Remove();
                     }
                 }).Traverse(rootElement);
         }
@@ -362,7 +258,7 @@ namespace ScrapEra.CleanReader
                     TryFindArticleContentElement(document, articleContentElementHint);
                 if (articleContentElement != null)
                 {
-                    return new[] {articleContentElement};
+                    return new[] { articleContentElement };
                 }
             }
             var paraElements = document.GetElementsByTagName("p");
@@ -381,7 +277,7 @@ namespace ScrapEra.CleanReader
                 // Add points for any comma-segments within this paragraph.
                 score += GetSegmentsCount(innerText, ',');
                 // For every PARAGRAPH_SEGMENT_LENGTH characters in this paragraph, add another point. Up to MAX_POINTS_FOR_SEGMENTS_COUNT points.
-                score += Math.Min(innerText.Length/ParagraphSegmentLength, MaxPointsForSegmentsCount);
+                score += Math.Min(innerText.Length / ParagraphSegmentLength, MaxPointsForSegmentsCount);
                 // Add the score to the parent.
                 if (parentElement != null &&
                     !"html".Equals(parentElement.Name.LocalName, StringComparison.OrdinalIgnoreCase))
@@ -390,12 +286,10 @@ namespace ScrapEra.CleanReader
                     AddPointsToElementScore(parentElement, score);
                 }
                 // Add half the score to the grandparent.
-                if (grandParentElement != null &&
-                    !"html".Equals(grandParentElement.Name.LocalName, StringComparison.OrdinalIgnoreCase))
-                {
-                    candidateElements.Add(grandParentElement);
-                    AddPointsToElementScore(grandParentElement, score/2);
-                }
+                if (grandParentElement == null ||
+                    "html".Equals(grandParentElement.Name.LocalName, StringComparison.OrdinalIgnoreCase)) continue;
+                candidateElements.Add(grandParentElement);
+                AddPointsToElementScore(grandParentElement, score / 2);
             }
             return candidateElements;
         }
@@ -409,7 +303,7 @@ namespace ScrapEra.CleanReader
                 var candidateScore = GetElementScore(candidateElement);
                 // Scale the final candidates score based on link density. Good content should have a
                 // relatively small link density (5% or less) and be mostly unaffected by this operation.
-                var newCandidateScore = (1.0f - GetLinksDensity(candidateElement))*candidateScore;
+                var newCandidateScore = (1.0f - GetLinksDensity(candidateElement)) * candidateScore;
                 SetElementScore(candidateElement, newCandidateScore);
                 if (topCandidateElement == null
                     || newCandidateScore > GetElementScore(topCandidateElement))
@@ -417,13 +311,12 @@ namespace ScrapEra.CleanReader
                     topCandidateElement = candidateElement;
                 }
             }
-            if (topCandidateElement == null
-                || "body".Equals(topCandidateElement.Name.LocalName, StringComparison.OrdinalIgnoreCase))
-            {
-                topCandidateElement = new XElement("div");
-                var documentBody = GetOrCreateBody(document);
-                topCandidateElement.Add(documentBody.Nodes());
-            }
+            if (topCandidateElement != null &&
+                !"body".Equals(topCandidateElement.Name.LocalName, StringComparison.OrdinalIgnoreCase))
+                return topCandidateElement;
+            topCandidateElement = new XElement("div");
+            var documentBody = GetOrCreateBody(document);
+            topCandidateElement.Add(documentBody.Nodes());
             return topCandidateElement;
         }
 
@@ -432,7 +325,6 @@ namespace ScrapEra.CleanReader
             /* Now that we have the top candidate, look through its siblings for content that might also be related.
              * Things like preambles, content split by ads that we removed, etc. */
             var articleContentElement = new XElement("div");
-            articleContentElement.SetId(ContentDivId);
             var parentElement = topCandidateElement.Parent;
             if (parentElement == null)
             {
@@ -446,7 +338,7 @@ namespace ScrapEra.CleanReader
             var siblingScoreThreshold =
                 Math.Max(
                     MaxSiblingScoreTreshold,
-                    SiblingScoreTresholdCoefficient*topCandidateElementScore);
+                    SiblingScoreTresholdCoefficient * topCandidateElementScore);
             var topCandidateClass = topCandidateElement.GetClass();
             // iterate through the sibling elements and decide whether append them
             foreach (var siblingElement in siblingElements)
@@ -457,7 +349,7 @@ namespace ScrapEra.CleanReader
                 // Give a bonus if sibling nodes and top canidates have the same class name
                 if (!string.IsNullOrEmpty(topCandidateClass) && siblingElement.GetClass() == topCandidateClass)
                 {
-                    contentBonus += topCandidateElementScore*SiblingScoreTresholdCoefficient;
+                    contentBonus += topCandidateElementScore * SiblingScoreTresholdCoefficient;
                 }
                 if (siblingElement == topCandidateElement)
                 {
@@ -486,29 +378,27 @@ namespace ScrapEra.CleanReader
                         {
                             // we'll append this paragraph if there are no links inside and if it contains a probable end of sentence indicator
                             append = GetLinksDensity(siblingElement).IsCloseToZero()
-                                     && _EndOfSentenceRegex.IsMatch(siblingElementInnerText);
+                                     && _endOfSentenceRegex.IsMatch(siblingElementInnerText);
                         }
                     }
                 }
-                if (append)
+                if (!append) continue;
+                XElement elementToAppend;
+                if ("div".Equals(siblingElementName, StringComparison.OrdinalIgnoreCase)
+                    || "p".Equals(siblingElementName, StringComparison.OrdinalIgnoreCase))
                 {
-                    XElement elementToAppend;
-                    if ("div".Equals(siblingElementName, StringComparison.OrdinalIgnoreCase)
-                        || "p".Equals(siblingElementName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        elementToAppend = siblingElement;
-                    }
-                    else
-                    {
-                        /* We have an element that isn't a common block level element, like a form or td tag.
-                         * Turn it into a div so it doesn't get filtered out later by accident. */
-                        elementToAppend = new XElement("div");
-                        elementToAppend.SetId(siblingElement.GetId());
-                        elementToAppend.SetClass(siblingElement.GetClass());
-                        elementToAppend.Add(siblingElement.Nodes());
-                    }
-                    articleContentElement.Add(elementToAppend);
+                    elementToAppend = siblingElement;
                 }
+                else
+                {
+                    /* We have an element that isn't a common block level element, like a form or td tag.
+                         * Turn it into a div so it doesn't get filtered out later by accident. */
+                    elementToAppend = new XElement("div");
+                    elementToAppend.SetId(siblingElement.GetId());
+                    elementToAppend.SetClass(siblingElement.GetClass());
+                    elementToAppend.Add(siblingElement.Nodes());
+                }
+                articleContentElement.Add(elementToAppend);
             }
             return articleContentElement;
         }
@@ -539,18 +429,18 @@ namespace ScrapEra.CleanReader
             /* Remove extra paragraphs. */
             var paraElements = articleContentElement.GetElementsByTagName("p");
             var elementsToRemove = (from paraElement in paraElements
-                let innerText = GetInnerText(paraElement, false)
-                where innerText.Length <= 0
-                let imgsCount = paraElement.GetElementsByTagName("img").Count()
-                where imgsCount <= 0
-                let embedsCount = paraElement.GetElementsByTagName("embed").Count()
-                where embedsCount <= 0
-                let objectsCount = paraElement.GetElementsByTagName("object").Count()
-                where objectsCount <= 0
-                select paraElement).ToList();
+                                    let innerText = GetInnerText(paraElement)
+                                    where innerText.Length <= 0
+                                    let imgsCount = paraElement.GetElementsByTagName("img").Count()
+                                    where imgsCount <= 0
+                                    let embedsCount = paraElement.GetElementsByTagName("embed").Count()
+                                    where embedsCount <= 0
+                                    let objectsCount = paraElement.GetElementsByTagName("object").Count()
+                                    where objectsCount <= 0
+                                    select paraElement).ToList();
             RemoveElements(elementsToRemove);
             /* Remove br's that are directly before paragraphs. */
-            articleContentElement.SetInnerHtml(_BreakBeforeParagraphRegex.Replace(articleContentElement.GetInnerHtml(),
+            articleContentElement.SetInnerHtml(_breakBeforeParagraphRegex.Replace(articleContentElement.GetInnerHtml(),
                 "<p"));
         }
 
@@ -566,7 +456,7 @@ namespace ScrapEra.CleanReader
             var linksLength =
                 element.GetElementsByTagName("a")
                     .Sum(anchorElement => GetInnerText(anchorElement).Length);
-            return (float) linksLength/elementInnerTextLength;
+            return (float)linksLength / elementInnerTextLength;
         }
 
         internal int GetSegmentsCount(string s, char ch)
@@ -574,47 +464,37 @@ namespace ScrapEra.CleanReader
             return s.Count(c => c == ch) + 1;
         }
 
-        /// <summary>
-        ///     Get "class/id weight" of the given <paramref name="element" />. Uses regular expressions to tell if this element
-        ///     looks good or bad.
-        /// </summary>
         internal int GetClassWeight(XElement element)
         {
-            if (_dontWeightClasses)
-            {
-                return 0;
-            }
             var weight = 0;
             /* Look for a special classname. */
             var elementClass = element.GetClass();
             if (elementClass.Length > 0)
             {
-                if (_NegativeWeightRegex.IsMatch(elementClass))
+                if (_negativeWeightRegex.IsMatch(elementClass))
                 {
                     weight -= 25;
                 }
-                if (_PositiveWeightRegex.IsMatch(elementClass))
+                if (_positiveWeightRegex.IsMatch(elementClass))
                 {
                     weight += 25;
                 }
             }
             /* Look for a special ID */
             var elementId = element.GetId();
-            if (elementId.Length > 0)
+            if (elementId.Length <= 0) return weight;
+            if (_negativeWeightRegex.IsMatch(elementId))
             {
-                if (_NegativeWeightRegex.IsMatch(elementId))
-                {
-                    weight -= 25;
-                }
-                if (_PositiveWeightRegex.IsMatch(elementId))
-                {
-                    weight += 25;
-                }
+                weight -= 25;
+            }
+            if (_positiveWeightRegex.IsMatch(elementId))
+            {
+                weight += 25;
             }
             return weight;
         }
 
-        internal string GetInnerText(XNode node, bool dontNormalizeSpaces)
+        internal string GetInnerText(XNode node)
         {
             if (node == null)
             {
@@ -628,28 +508,19 @@ namespace ScrapEra.CleanReader
             }
             else if (node is XText)
             {
-                result = ((XText) node).Value;
+                result = ((XText)node).Value;
             }
             else
             {
                 throw new NotSupportedException(string.Format("Nodes of type '{0}' are not supported.", node.GetType()));
             }
             result = (result ?? "").Trim();
-            if (!dontNormalizeSpaces)
-            {
-                return _NormalizeSpacesRegex.Replace(result, " ");
-            }
-            return result;
-        }
-
-        internal string GetInnerText(XNode node)
-        {
-            return GetInnerText(node, _dontNormalizeSpacesInTextContent);
+            return _normalizeSpacesRegex.Replace(result, " ");
         }
 
         internal void KillBreaks(XElement element)
         {
-            element.SetInnerHtml(_KillBreaksRegex.Replace(element.GetInnerHtml(), "<br />"));
+            element.SetInnerHtml(_killBreaksRegex.Replace(element.GetInnerHtml(), "<br />"));
         }
 
         /// <summary>
@@ -692,41 +563,39 @@ namespace ScrapEra.CleanReader
                 /* If there are not very many commas and the number of non-paragraph elements
                  * is more than paragraphs or other ominous signs, remove the element. */
                 var elementInnerText = GetInnerText(element);
-                if (GetSegmentsCount(elementInnerText, ',') < MinCommaSegments)
+                if (GetSegmentsCount(elementInnerText, ',') >= MinCommaSegments) continue;
+                var psCount = element.GetElementsByTagName("p").Count();
+                var imgsCount = element.GetElementsByTagName("img").Count();
+                var lisCount = element.GetElementsByTagName("li").Count();
+                var inputsCount = element.GetElementsByTagName("input").Count();
+                // while counting embeds we omit video-embeds
+                var embedsCount =
+                    element.GetElementsByTagName("embed")
+                        .Count();
+                var linksDensity = GetLinksDensity(element);
+                var innerTextLength = elementInnerText.Length;
+                var elementNameLower = elementName.Trim().ToLower();
+                var remove = (imgsCount > psCount)
+                             ||
+                             (lisCount - LisCountTreshold > psCount && elementNameLower != "ul" &&
+                              elementNameLower != "ol")
+                             || (inputsCount > psCount / 3)
+                             ||
+                             (innerTextLength < MinInnerTextLength &&
+                              (imgsCount == 0 || imgsCount > MaxImagesInShortSegmentsCount))
+                             ||
+                             (weight < ClassWeightTreshold &&
+                              linksDensity > MaxDensityForElementsWithSmallerClassWeight)
+                             ||
+                             (weight >= ClassWeightTreshold &&
+                              linksDensity > MaxDensityForElementsWithGreaterClassWeight)
+                             ||
+                             (embedsCount > MaxEmbedsCount ||
+                              (embedsCount == MaxEmbedsCount &&
+                               innerTextLength < MinInnerTextLengthInElementsWithEmbed));
+                if (remove)
                 {
-                    var psCount = element.GetElementsByTagName("p").Count();
-                    var imgsCount = element.GetElementsByTagName("img").Count();
-                    var lisCount = element.GetElementsByTagName("li").Count();
-                    var inputsCount = element.GetElementsByTagName("input").Count();
-                    // while counting embeds we omit video-embeds
-                    var embedsCount =
-                        element.GetElementsByTagName("embed")
-                            .Count();
-                    var linksDensity = GetLinksDensity(element);
-                    var innerTextLength = elementInnerText.Length;
-                    var elementNameLower = elementName.Trim().ToLower();
-                    var remove = (imgsCount > psCount)
-                                 ||
-                                 (lisCount - LisCountTreshold > psCount && elementNameLower != "ul" &&
-                                  elementNameLower != "ol")
-                                 || (inputsCount > psCount/3)
-                                 ||
-                                 (innerTextLength < MinInnerTextLength &&
-                                  (imgsCount == 0 || imgsCount > MaxImagesInShortSegmentsCount))
-                                 ||
-                                 (weight < ClassWeightTreshold &&
-                                  linksDensity > MaxDensityForElementsWithSmallerClassWeight)
-                                 ||
-                                 (weight >= ClassWeightTreshold &&
-                                  linksDensity > MaxDensityForElementsWithGreaterClassWeight)
-                                 ||
-                                 (embedsCount > MaxEmbedsCount ||
-                                  (embedsCount == MaxEmbedsCount &&
-                                   innerTextLength < MinInnerTextLengthInElementsWithEmbed));
-                    if (remove)
-                    {
-                        elementsToRemove.Add(element);
-                    }
+                    elementsToRemove.Add(element);
                 }
             } /* end foreach */
             RemoveElements(elementsToRemove);
@@ -752,16 +621,7 @@ namespace ScrapEra.CleanReader
         internal void CleanStyles(XElement rootElement)
         {
             new ElementTraveseHelper(
-                element =>
-                {
-                    var elementClass = element.GetClass();
-                    if (elementClass.Contains(ReadabilityStyledCssClass))
-                    {
-                        // don't remove the style if that's we who have styled this element
-                        return;
-                    }
-                    element.SetStyle(null);
-                }).Traverse(rootElement);
+                element => { element.SetStyle(null); }).Traverse(rootElement);
         }
 
         internal string GetUserStyleClass(string prefix, string enumStr)
@@ -793,17 +653,15 @@ namespace ScrapEra.CleanReader
         private static XElement GetOrCreateBody(XDocument document)
         {
             var documentBody = document.GetBody();
-            if (documentBody == null)
+            if (documentBody != null) return documentBody;
+            var htmlElement = document.GetChildrenByTagName("html").FirstOrDefault();
+            if (htmlElement == null)
             {
-                var htmlElement = document.GetChildrenByTagName("html").FirstOrDefault();
-                if (htmlElement == null)
-                {
-                    htmlElement = new XElement("html");
-                    document.Add(htmlElement);
-                }
-                documentBody = new XElement("body");
-                htmlElement.Add(documentBody);
+                htmlElement = new XElement("html");
+                document.Add(htmlElement);
             }
+            documentBody = new XElement("body");
+            htmlElement.Add(documentBody);
             return documentBody;
         }
 
@@ -864,7 +722,7 @@ namespace ScrapEra.CleanReader
 
         private static string ResolveElementUrl(string url, string articleUrl)
         {
-            if (_MailtoHrefRegex.IsMatch(url))
+            if (MailtoHrefRegex.IsMatch(url))
             {
                 return url;
             }
@@ -873,17 +731,12 @@ namespace ScrapEra.CleanReader
             {
                 return url;
             }
-            /* If the link is simply a query string, then simply attach it to the original URL */
             if (url.StartsWith("?"))
             {
                 return baseUri.Scheme + "://" + baseUri.Host + baseUri.AbsolutePath + url;
             }
             Uri absoluteUri;
-            if (Uri.TryCreate(baseUri, url, out absoluteUri))
-            {
-                return absoluteUri.OriginalString;
-            }
-            return url;
+            return Uri.TryCreate(baseUri, url, out absoluteUri) ? absoluteUri.OriginalString : url;
         }
 
         private static string GetElementName(XElement element)
@@ -903,20 +756,15 @@ namespace ScrapEra.CleanReader
             {
                 return false;
             }
-            if (!_LikelyParagraphDivRegex.IsMatch(element.GetClass()))
+            if (!LikelyParagraphDivRegex.IsMatch(element.GetClass()))
             {
                 // we'll consider divs only with certain classes as potential paragraph divs
                 return false;
             }
             var childNode = element.Nodes().SingleOrNone();
             var childElement = childNode as XElement;
-            if (childElement != null
-                && "p".Equals(GetElementName(childElement), StringComparison.OrdinalIgnoreCase))
-            {
-                // we have a div with a single child element that is a paragraph
-                return true;
-            }
-            return false;
+            return childElement != null
+                   && "p".Equals(GetElementName(childElement), StringComparison.OrdinalIgnoreCase);
         }
 
         private static string ExtractTitle(XDocument transcodedXmlDocument)
@@ -930,8 +778,7 @@ namespace ScrapEra.CleanReader
                     : null;
             if (!string.IsNullOrEmpty(extractedTitle))
             {
-                extractedTitle = _TitleWhitespacesCleanUpRegex.Replace(extractedTitle, " ");
-                extractedTitle = extractedTitle.Trim();
+                extractedTitle = TitleWhitespacesCleanUpRegex.Replace(extractedTitle, " ").Trim();
             }
             if (extractedTitle != null && extractedTitle.Length == 0)
             {
@@ -940,7 +787,7 @@ namespace ScrapEra.CleanReader
             return extractedTitle;
         }
 
-        private static XElement TryFindArticleContentElement(XDocument document, string articleContentElementHint)
+        private static XElement TryFindArticleContentElement(XContainer document, string articleContentElementHint)
         {
             if (document == null)
             {
@@ -970,5 +817,78 @@ namespace ScrapEra.CleanReader
         {
             _elementsScores[element] = score;
         }
+
+        #region "Class Fields"
+
+        internal const string OverlayDivId = Constants.OverlayDivId;
+        internal const string InnerDivId = Constants.InnerDivId;
+        private const int MinParagraphLength = Constants.MinParagraphLength;
+        private const int MinInnerTextLength = Constants.MinInnerTextLength;
+        private const int ParagraphSegmentLength = Constants.ParagraphSegmentLength;
+        private const int MaxPointsForSegmentsCount = Constants.MaxPointsForSegmentsCount;
+        private const int MinSiblingParagraphLength = Constants.MinSiblingParagraphLength;
+        private const int MinCommaSegments = Constants.MinCommaSegments;
+        private const int LisCountTreshold = Constants.LisCountTreshold;
+        private const int MaxImagesInShortSegmentsCount = Constants.MaxImagesInShortSegmentsCount;
+        private const int MinInnerTextLengthInElementsWithEmbed = Constants.MinInnerTextLengthInElementsWithEmbed;
+        private const int ClassWeightTreshold = Constants.ClassWeightTreshold;
+        private const int MaxEmbedsCount = Constants.MaxEmbedsCount;
+        private const int MaxArticleTitleLength = Constants.MaxArticleTitleLength;
+        private const int MinArticleTitleLength = Constants.MinArticleTitleLength;
+        private const int MinArticleTitleWordsCount1 = Constants.MinArticleTitleWordsCount1;
+        private const int MinArticleTitleWordsCount2 = Constants.MinArticleTitleWordsCount2;
+        private const float SiblingScoreTresholdCoefficient = Constants.SiblingScoreTresholdCoefficient;
+        private const float MaxSiblingScoreTreshold = Constants.MaxSiblingScoreTreshold;
+        private const float MaxSiblingParagraphLinksDensity = Constants.MaxSiblingParagraphLinksDensity;
+        private const float MaxHeaderLinksDensity = Constants.MaxHeaderLinksDensity;
+
+        private const float MaxDensityForElementsWithSmallerClassWeight =
+            Constants.MaxDensityForElementsWithSmallerClassWeight;
+
+        private const float MaxDensityForElementsWithGreaterClassWeight =
+            Constants.MaxDensityForElementsWithGreaterClassWeight;
+        private static readonly string StylesheetResourceName = Constants.StylesheetResourceName;
+        public Func<AttributeTransformationInput, AttributeTransformationResult> ImageSourceTranformer { get; set; }
+        public Func<AttributeTransformationInput, AttributeTransformationResult> AnchorHrefTranformer { get; set; }
+
+        #endregion
+
+        #region "Compiled Regex"
+
+        private readonly Regex _unlikelyCandidatesRegex =
+            Constants.UnlikelyCandidatesRegex;
+
+        private readonly Regex _okMaybeItsACandidateRegex = Constants.OkMaybeItsACandidateRegex;
+
+        private readonly Regex _positiveWeightRegex = Constants.PositiveWeightRegex;
+
+        private readonly Regex _negativeWeightRegex = Constants.NegativeWeightRegex;
+
+        private readonly Regex _divToPElementsRegex = Constants.DivToPElementsRegex;
+
+        private readonly Regex _endOfSentenceRegex = Constants.EndOfSentenceRegex;
+
+        private readonly Regex _breakBeforeParagraphRegex = Constants.BreakBeforeParagraphRegex;
+        private readonly Regex _normalizeSpacesRegex = Constants.NormalizeSpacesRegex;
+
+        private readonly Regex _killBreaksRegex = Constants.KillBreaksRegex;
+
+        private readonly Regex _replaceDoubleBrsRegex = Constants.ReplaceDoubleBrsRegex;
+
+        private readonly Regex _articleTitleDashRegex1 = Constants.ArticleTitleDashRegex1;
+        private readonly Regex _articleTitleDashRegex2 = Constants.ArticleTitleDashRegex2;
+
+        private readonly Regex _articleTitleDashRegex3 = Constants.ArticleTitleDashRegex3;
+
+        private readonly Regex _articleTitleColonRegex1 = Constants.ArticleTitleColonRegex1;
+        private readonly Regex _articleTitleColonRegex2 = Constants.ArticleTitleColonRegex2;
+
+        private static readonly Regex LikelyParagraphDivRegex = Constants.LikelyParagraphDivRegex;
+
+        private static readonly Regex MailtoHrefRegex = Constants.MailtoHrefRegex;
+
+        private static readonly Regex TitleWhitespacesCleanUpRegex = Constants.TitleWhitespacesCleanUpRegex;
+
+        #endregion
     }
 }
