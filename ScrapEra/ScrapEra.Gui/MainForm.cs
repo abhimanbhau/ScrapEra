@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using MetroFramework;
 using MetroFramework.Forms;
 using ScrapEra.CleanReader;
 using ScrapEra.Gui.Properties;
@@ -13,6 +15,7 @@ namespace ScrapEra.Gui
     public partial class MainForm : MetroForm
     {
         private readonly BindingSource _bs = new BindingSource();
+        private Thread _cleanReaderCentralThread;
 
         public MainForm()
         {
@@ -25,7 +28,6 @@ namespace ScrapEra.Gui
         private void MainForm_Load(object sender, EventArgs e)
         {
             Text += " " + Settings.Default.Version;
-
             // About Page setup
             txtAbout.Text = Resources.AboutScrapEra;
             Refresh();
@@ -47,14 +49,40 @@ namespace ScrapEra.Gui
 
         private void btnLoadCleanReader_Click(object sender, EventArgs e)
         {
+            if (_cleanReaderCentralThread != null)
+            {
+                MetroMessageBox.Show(this,
+                    "Please Wait..\n\nAlready processing previous request",
+                    "Already in progress",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            _cleanReaderCentralThread = new Thread(CleanReaderWorker);
+            _cleanReaderCentralThread.Start();
+        }
+
+        public void CleanReaderWorker()
+        {
             var tr = new CleanReaderWeb();
             bool success;
             var stuff = tr.Transcode(txtCleanReaderUrl.Text, out success);
             webCleanReader.DocumentText = stuff;
+            CleanThread();
+        }
+
+        private void CleanThread()
+        {
+            _cleanReaderCentralThread = null;
         }
 
         private void btnCleanReaderHelp_Click(object sender, EventArgs e)
         {
+            MetroMessageBox.Show(this,
+                "This tool help you clean clutter from URL pages\nIt uses intelligent algorithm to achieve the same\n\n"
+                + "This tool is part of ScrapEra suite",
+                "ScrapEra CleanReader Help",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

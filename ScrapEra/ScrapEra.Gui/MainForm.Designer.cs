@@ -36,10 +36,8 @@
             this.lstLogs = new System.Windows.Forms.ListBox();
             this.tabAbout = new MetroFramework.Controls.MetroTabPage();
             this.txtAbout = new MetroFramework.Controls.MetroTextBox();
-            this.tabDashboard = new MetroFramework.Controls.MetroTabPage();
-            this.tabHome = new MetroFramework.Controls.MetroTabPage();
-            this.tabLocalScraping = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.btnCleanReaderHelp = new MetroFramework.Controls.MetroButton();
             this.btnCleanReaderConfigure = new MetroFramework.Controls.MetroButton();
             this.btnCleanReaderToTxt = new MetroFramework.Controls.MetroButton();
             this.btnCleanReaderToHtml = new MetroFramework.Controls.MetroButton();
@@ -47,9 +45,11 @@
             this.webCleanReader = new System.Windows.Forms.WebBrowser();
             this.btnLoadCleanReader = new MetroFramework.Controls.MetroButton();
             this.txtCleanReaderUrl = new MetroFramework.Controls.MetroTextBox();
+            this.tabDashboard = new MetroFramework.Controls.MetroTabPage();
+            this.tabHome = new MetroFramework.Controls.MetroTabPage();
+            this.tabLocalScraping = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCleanReaderHelp = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -63,16 +63,16 @@
             this.metroTabControl1.Controls.Add(this.tabDebug);
             this.metroTabControl1.Controls.Add(this.tabAbout);
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.tabDashboard);
             this.metroTabControl1.Controls.Add(this.tabHome);
+            this.metroTabControl1.Controls.Add(this.tabDashboard);
             this.metroTabControl1.Controls.Add(this.tabLocalScraping);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 5;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(720, 405);
-            this.metroTabControl1.TabIndex = 0;
+            this.metroTabControl1.TabIndex = 2;
             this.metroTabControl1.UseSelectable = true;
             // 
             // tabDebug
@@ -230,48 +230,6 @@
             this.txtAbout.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtAbout.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // tabDashboard
-            // 
-            this.tabDashboard.HorizontalScrollbarBarColor = true;
-            this.tabDashboard.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabDashboard.HorizontalScrollbarSize = 10;
-            this.tabDashboard.Location = new System.Drawing.Point(4, 38);
-            this.tabDashboard.Name = "tabDashboard";
-            this.tabDashboard.Size = new System.Drawing.Size(712, 363);
-            this.tabDashboard.TabIndex = 0;
-            this.tabDashboard.Text = "Dashboard";
-            this.tabDashboard.VerticalScrollbarBarColor = true;
-            this.tabDashboard.VerticalScrollbarHighlightOnWheel = false;
-            this.tabDashboard.VerticalScrollbarSize = 10;
-            // 
-            // tabHome
-            // 
-            this.tabHome.HorizontalScrollbarBarColor = true;
-            this.tabHome.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabHome.HorizontalScrollbarSize = 10;
-            this.tabHome.Location = new System.Drawing.Point(4, 38);
-            this.tabHome.Name = "tabHome";
-            this.tabHome.Size = new System.Drawing.Size(712, 363);
-            this.tabHome.TabIndex = 1;
-            this.tabHome.Text = "ScrapE home";
-            this.tabHome.VerticalScrollbarBarColor = true;
-            this.tabHome.VerticalScrollbarHighlightOnWheel = false;
-            this.tabHome.VerticalScrollbarSize = 10;
-            // 
-            // tabLocalScraping
-            // 
-            this.tabLocalScraping.HorizontalScrollbarBarColor = true;
-            this.tabLocalScraping.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabLocalScraping.HorizontalScrollbarSize = 10;
-            this.tabLocalScraping.Location = new System.Drawing.Point(4, 38);
-            this.tabLocalScraping.Name = "tabLocalScraping";
-            this.tabLocalScraping.Size = new System.Drawing.Size(712, 363);
-            this.tabLocalScraping.TabIndex = 4;
-            this.tabLocalScraping.Text = "Local Scraping Beta";
-            this.tabLocalScraping.VerticalScrollbarBarColor = true;
-            this.tabLocalScraping.VerticalScrollbarHighlightOnWheel = false;
-            this.tabLocalScraping.VerticalScrollbarSize = 10;
-            // 
             // metroTabPage1
             // 
             this.metroTabPage1.Controls.Add(this.btnCleanReaderHelp);
@@ -293,6 +251,17 @@
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // btnCleanReaderHelp
+            // 
+            this.btnCleanReaderHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanReaderHelp.Location = new System.Drawing.Point(608, 294);
+            this.btnCleanReaderHelp.Name = "btnCleanReaderHelp";
+            this.btnCleanReaderHelp.Size = new System.Drawing.Size(101, 55);
+            this.btnCleanReaderHelp.TabIndex = 9;
+            this.btnCleanReaderHelp.Text = "Help";
+            this.btnCleanReaderHelp.UseSelectable = true;
+            this.btnCleanReaderHelp.Click += new System.EventHandler(this.btnCleanReaderHelp_Click);
             // 
             // btnCleanReaderConfigure
             // 
@@ -388,6 +357,48 @@
             this.txtCleanReaderUrl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCleanReaderUrl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // tabDashboard
+            // 
+            this.tabDashboard.HorizontalScrollbarBarColor = true;
+            this.tabDashboard.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabDashboard.HorizontalScrollbarSize = 10;
+            this.tabDashboard.Location = new System.Drawing.Point(4, 38);
+            this.tabDashboard.Name = "tabDashboard";
+            this.tabDashboard.Size = new System.Drawing.Size(712, 363);
+            this.tabDashboard.TabIndex = 0;
+            this.tabDashboard.Text = "Dashboard";
+            this.tabDashboard.VerticalScrollbarBarColor = true;
+            this.tabDashboard.VerticalScrollbarHighlightOnWheel = false;
+            this.tabDashboard.VerticalScrollbarSize = 10;
+            // 
+            // tabHome
+            // 
+            this.tabHome.HorizontalScrollbarBarColor = true;
+            this.tabHome.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabHome.HorizontalScrollbarSize = 10;
+            this.tabHome.Location = new System.Drawing.Point(4, 38);
+            this.tabHome.Name = "tabHome";
+            this.tabHome.Size = new System.Drawing.Size(712, 363);
+            this.tabHome.TabIndex = 1;
+            this.tabHome.Text = "ScrapE home";
+            this.tabHome.VerticalScrollbarBarColor = true;
+            this.tabHome.VerticalScrollbarHighlightOnWheel = false;
+            this.tabHome.VerticalScrollbarSize = 10;
+            // 
+            // tabLocalScraping
+            // 
+            this.tabLocalScraping.HorizontalScrollbarBarColor = true;
+            this.tabLocalScraping.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabLocalScraping.HorizontalScrollbarSize = 10;
+            this.tabLocalScraping.Location = new System.Drawing.Point(4, 38);
+            this.tabLocalScraping.Name = "tabLocalScraping";
+            this.tabLocalScraping.Size = new System.Drawing.Size(712, 363);
+            this.tabLocalScraping.TabIndex = 4;
+            this.tabLocalScraping.Text = "Local Scraping Beta";
+            this.tabLocalScraping.VerticalScrollbarBarColor = true;
+            this.tabLocalScraping.VerticalScrollbarHighlightOnWheel = false;
+            this.tabLocalScraping.VerticalScrollbarSize = 10;
+            // 
             // metroTabPage2
             // 
             this.metroTabPage2.Controls.Add(this.tableLayoutPanel1);
@@ -418,17 +429,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(712, 363);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // btnCleanReaderHelp
-            // 
-            this.btnCleanReaderHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCleanReaderHelp.Location = new System.Drawing.Point(608, 294);
-            this.btnCleanReaderHelp.Name = "btnCleanReaderHelp";
-            this.btnCleanReaderHelp.Size = new System.Drawing.Size(101, 55);
-            this.btnCleanReaderHelp.TabIndex = 9;
-            this.btnCleanReaderHelp.Text = "Help";
-            this.btnCleanReaderHelp.UseSelectable = true;
-            this.btnCleanReaderHelp.Click += new System.EventHandler(this.btnCleanReaderHelp_Click);
-            // 
             // MainForm
             // 
             this.ApplyImageInvert = true;
@@ -437,10 +437,14 @@
             this.BackImage = ((System.Drawing.Image)(resources.GetObject("$this.BackImage")));
             this.BackImagePadding = new System.Windows.Forms.Padding(430, 10, 0, 0);
             this.BackMaxSize = 50;
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(760, 485);
             this.Controls.Add(this.metroTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "ScrapEra : Web Scraping Suite";
             this.TransparencyKey = System.Drawing.Color.SkyBlue;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -452,6 +456,7 @@
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
         #endregion
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
