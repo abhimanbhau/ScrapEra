@@ -21,11 +21,10 @@
         public string Transcode(string url, out bool mainContentExtracted)
         {
             string extractedTitle;
-            return DoTranscode(url, DomSerializationParams.CreateDefault(), out mainContentExtracted, out extractedTitle);
+            return DoTranscode(url, out mainContentExtracted, out extractedTitle);
         }
 
-        private string DoTranscode(string url, DomSerializationParams domSerializationParams,
-            out bool mainContentExtracted, out string extractedTitle)
+        private string DoTranscode(string url, out bool mainContentExtracted, out string extractedTitle)
         {
             var htmlContent = _urlFetcher.Fetch(url);
             if (string.IsNullOrEmpty(htmlContent))
@@ -35,7 +34,7 @@
                 return null;
             }
             var document = _transcoder.TranscodeToXml(htmlContent, url, out mainContentExtracted, out extractedTitle);
-            return _sgmlDomSerializer.SerializeDocument(document, domSerializationParams);
+            return _sgmlDomSerializer.SerializeDocument(document);
         }
     }
 }

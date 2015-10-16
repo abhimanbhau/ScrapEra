@@ -19,11 +19,7 @@ namespace ScrapEra.CleanReader
                 return null;
             }
             var secondElement = enumerable.Skip(1).FirstOrDefault();
-            if (secondElement != null)
-            {
-                return null;
-            }
-            return firstElement;
+            return secondElement != null ? null : firstElement;
         }
     }
 }

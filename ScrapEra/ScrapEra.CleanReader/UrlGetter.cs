@@ -30,11 +30,6 @@ namespace ScrapEra.CleanReader
             return MakeRequest(url, () => _webClient.DownloadData(url));
         }
 
-        public string UploadValues(string url, NameValueCollection keyValuePairs)
-        {
-            return MakeRequest(url, () => _webClient.UploadValues(url, keyValuePairs));
-        }
-
         private string MakeRequest(string url, Func<byte[]> makeRequestFunc)
         {
             if (string.IsNullOrEmpty(url))
@@ -56,7 +51,7 @@ namespace ScrapEra.CleanReader
                 }
                 else
                 {
-                    throw new NotSupportedException("Unsupported content encoding: " + contentEncoding + ".");
+                    throw new Exception("Unsupported content encoding: " + contentEncoding + ".");
                 }
             }
             return Encoding.UTF8.GetString(responseBytes);
