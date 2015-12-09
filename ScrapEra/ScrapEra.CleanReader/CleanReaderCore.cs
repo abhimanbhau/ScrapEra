@@ -142,7 +142,6 @@ namespace ScrapEra.CleanReader
         internal void GlueDocument(XDocument document, XElement articleTitleElement, XElement articleContentElement)
         {
             var documentBody = GetOrCreateBody(document);
-            /* Include readability.css stylesheet. */
             var headElement = document.GetElementsByTagName("head").FirstOrDefault();
             if (headElement == null)
             {
@@ -426,7 +425,6 @@ namespace ScrapEra.CleanReader
             CleanConditionally(articleContentElement, "table");
             CleanConditionally(articleContentElement, "ul");
             CleanConditionally(articleContentElement, "div");
-            /* Remove extra paragraphs. */
             var paraElements = articleContentElement.GetElementsByTagName("p");
             var elementsToRemove = (from paraElement in paraElements
                                     let innerText = GetInnerText(paraElement)
@@ -467,7 +465,6 @@ namespace ScrapEra.CleanReader
         internal int GetClassWeight(XElement element)
         {
             var weight = 0;
-            /* Look for a special classname. */
             var elementClass = element.GetClass();
             if (elementClass.Length > 0)
             {
@@ -480,7 +477,6 @@ namespace ScrapEra.CleanReader
                     weight += 25;
                 }
             }
-            /* Look for a special ID */
             var elementId = element.GetId();
             if (elementId.Length <= 0) return weight;
             if (_negativeWeightRegex.IsMatch(elementId))
@@ -533,11 +529,6 @@ namespace ScrapEra.CleanReader
             RemoveElements(elementsToRemove);
         }
 
-        /// <summary>
-        ///     Cleans a <paramref name="rootElement" /> of all elements with name <paramref name="elementName" /> if they look
-        ///     fishy.
-        ///     "Fishy" is an algorithm based on content length, classnames, link density, number of images and embeds, etc.
-        /// </summary>
         internal void CleanConditionally(XElement rootElement, string elementName)
         {
             if (elementName == null)
@@ -597,7 +588,7 @@ namespace ScrapEra.CleanReader
                 {
                     elementsToRemove.Add(element);
                 }
-            } /* end foreach */
+            }
             RemoveElements(elementsToRemove);
         }
 
@@ -691,31 +682,29 @@ namespace ScrapEra.CleanReader
                     continue;
                 }
                 attributeValue = ResolveElementUrl(attributeValue, url);
-                if (!string.IsNullOrEmpty(attributeValue))
+                if (string.IsNullOrEmpty(attributeValue)) continue;
+                AttributeTransformationResult attributeTransformationResult;
+                if (attributeValueTransformer != null)
                 {
-                    AttributeTransformationResult attributeTransformationResult;
-                    if (attributeValueTransformer != null)
-                    {
-                        attributeTransformationResult =
-                            attributeValueTransformer.Invoke(new AttributeTransformationInput
-                            {
-                                AttributeValue = attributeValue,
-                                Element = element
-                            });
-                    }
-                    else
-                    {
-                        attributeTransformationResult = new AttributeTransformationResult
+                    attributeTransformationResult =
+                        attributeValueTransformer.Invoke(new AttributeTransformationInput
                         {
-                            TransformedValue = attributeValue
-                        };
-                    }
-                    element.SetAttributeValue(attributeName, attributeTransformationResult.TransformedValue);
-                    if (!string.IsNullOrEmpty(attributeTransformationResult.OriginalValueAttributeName))
+                            AttributeValue = attributeValue,
+                            Element = element
+                        });
+                }
+                else
+                {
+                    attributeTransformationResult = new AttributeTransformationResult
                     {
-                        element.SetAttributeValue(attributeTransformationResult.OriginalValueAttributeName,
-                            attributeValue);
-                    }
+                        TransformedValue = attributeValue
+                    };
+                }
+                element.SetAttributeValue(attributeName, attributeTransformationResult.TransformedValue);
+                if (!string.IsNullOrEmpty(attributeTransformationResult.OriginalValueAttributeName))
+                {
+                    element.SetAttributeValue(attributeTransformationResult.OriginalValueAttributeName,
+                        attributeValue);
                 }
             }
         }

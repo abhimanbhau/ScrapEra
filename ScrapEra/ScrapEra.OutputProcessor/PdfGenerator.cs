@@ -86,12 +86,12 @@ namespace ScrapEra.OutputProcessor
                         cb.BeginLayer(layer);
                         cb.SetFontAndSize(BaseFont.CreateFont(
                             BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED), 50);
-                        var gState = new PdfGState {FillOpacity = 0.25f};
+                        var gState = new PdfGState { FillOpacity = 0.25f };
                         cb.SetGState(gState);
                         cb.SetColorFill(BaseColor.BLACK);
                         cb.BeginText();
                         cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER,
-                            "(c)2015 ScrapEra by Abhimanbhau Kolte", rect.Width/2, rect.Height/2, 45f);
+                            "(c)2015 ScrapEra", rect.Width / 2, rect.Height / 2, 45f);
                         cb.EndText();
                         cb.EndLayer();
                     }
