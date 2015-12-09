@@ -9,6 +9,8 @@ using ScrapEra.CleanReader;
 using ScrapEra.Gui.Properties;
 using ScrapEra.ScrapLogger;
 using ScrapEra.Utils;
+using System.Text;
+
 
 namespace ScrapEra.Gui
 {
@@ -57,7 +59,7 @@ namespace ScrapEra.Gui
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            _cleanReaderCentralThread = new Thread(CleanReaderWorker) {IsBackground = true};
+            _cleanReaderCentralThread = new Thread(CleanReaderWorker) { IsBackground = true };
             _cleanReaderCentralThread.Start();
         }
 
@@ -100,6 +102,52 @@ namespace ScrapEra.Gui
                 "ScrapEra CleanReader Help",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private void btnCleanReaderToPdf_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCleanReaderToHtml_Click(object sender, EventArgs e)
+        {
+            var sf = new SaveFileDialog();
+            sf.Title = "Select File to save HTML content as";
+            sf.DefaultExt = "html";
+            sf.AddExtension = true;
+            sf.AutoUpgradeEnabled = true;
+            sf.Filter = "HTML files | *.html";
+            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                File.WriteAllText(sf.FileName, webCleanReader.DocumentText);
+            }
+        }
+
+        private void btnCleanReaderToTxt_Click(object sender, EventArgs e)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(webCleanReader.DocumentText);
+            var stuff = doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerText);
+            StringBuilder sb = new StringBuilder();
+            foreach (var str in stuff)
+            {
+                sb.Append(str);
+            }
+            var sf = new SaveFileDialog();
+            sf.Title = "Select File to save HTML content as";
+            sf.DefaultExt = "txt";
+            sf.AddExtension = true;
+            sf.AutoUpgradeEnabled = true;
+            sf.Filter = "Text files | *.txt";
+            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                File.WriteAllText(sf.FileName, sb.ToString());
+            }
+        }
+
+        private void btnCleanReaderConfigure_Click(object sender, EventArgs e)
+        {
+            MetroMessageBox.Show(this, "Not yet implemented", "WIP", MessageBoxButtons.OK, MessageBoxIcon.Hand);
         }
     }
 }
