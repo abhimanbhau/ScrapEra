@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework;
@@ -9,8 +10,7 @@ using ScrapEra.CleanReader;
 using ScrapEra.Gui.Properties;
 using ScrapEra.ScrapLogger;
 using ScrapEra.Utils;
-using System.Text;
-
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace ScrapEra.Gui
 {
@@ -59,7 +59,7 @@ namespace ScrapEra.Gui
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            _cleanReaderCentralThread = new Thread(CleanReaderWorker) { IsBackground = true };
+            _cleanReaderCentralThread = new Thread(CleanReaderWorker) {IsBackground = true};
             _cleanReaderCentralThread.Start();
         }
 
@@ -106,7 +106,6 @@ namespace ScrapEra.Gui
 
         private void btnCleanReaderToPdf_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnCleanReaderToHtml_Click(object sender, EventArgs e)
@@ -117,7 +116,7 @@ namespace ScrapEra.Gui
             sf.AddExtension = true;
             sf.AutoUpgradeEnabled = true;
             sf.Filter = "HTML files | *.html";
-            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (sf.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(sf.FileName, webCleanReader.DocumentText);
             }
@@ -125,10 +124,10 @@ namespace ScrapEra.Gui
 
         private void btnCleanReaderToTxt_Click(object sender, EventArgs e)
         {
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            var doc = new HtmlDocument();
             doc.LoadHtml(webCleanReader.DocumentText);
             var stuff = doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerText);
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (var str in stuff)
             {
                 sb.Append(str);
@@ -139,7 +138,7 @@ namespace ScrapEra.Gui
             sf.AddExtension = true;
             sf.AutoUpgradeEnabled = true;
             sf.Filter = "Text files | *.txt";
-            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (sf.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(sf.FileName, sb.ToString());
             }

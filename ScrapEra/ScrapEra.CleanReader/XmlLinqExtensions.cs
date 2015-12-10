@@ -43,7 +43,7 @@ namespace ScrapEra.CleanReader
             {
                 return "";
             }
-            return (titleElement.Value).Trim();
+            return titleElement.Value.Trim();
         }
 
         public static string GetId(this XElement element)
@@ -83,7 +83,7 @@ namespace ScrapEra.CleanReader
             }
             var attribute = element.Attribute(attributeName);
             return attribute != null
-                ? (attribute.Value)
+                ? attribute.Value
                 : defaultValue;
         }
 

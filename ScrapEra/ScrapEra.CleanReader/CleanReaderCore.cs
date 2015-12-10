@@ -219,7 +219,7 @@ namespace ScrapEra.CleanReader
                                     return;
                                 }
                                 var paraElement = new XElement("p");
-                                paraElement.SetInnerHtml(((XText)childNode).Value);
+                                paraElement.SetInnerHtml(((XText) childNode).Value);
                                 childNode.ReplaceWith(paraElement);
                             }
                             ).Traverse(element);
@@ -257,7 +257,7 @@ namespace ScrapEra.CleanReader
                     TryFindArticleContentElement(document, articleContentElementHint);
                 if (articleContentElement != null)
                 {
-                    return new[] { articleContentElement };
+                    return new[] {articleContentElement};
                 }
             }
             var paraElements = document.GetElementsByTagName("p");
@@ -276,7 +276,7 @@ namespace ScrapEra.CleanReader
                 // Add points for any comma-segments within this paragraph.
                 score += GetSegmentsCount(innerText, ',');
                 // For every PARAGRAPH_SEGMENT_LENGTH characters in this paragraph, add another point. Up to MAX_POINTS_FOR_SEGMENTS_COUNT points.
-                score += Math.Min(innerText.Length / ParagraphSegmentLength, MaxPointsForSegmentsCount);
+                score += Math.Min(innerText.Length/ParagraphSegmentLength, MaxPointsForSegmentsCount);
                 // Add the score to the parent.
                 if (parentElement != null &&
                     !"html".Equals(parentElement.Name.LocalName, StringComparison.OrdinalIgnoreCase))
@@ -288,7 +288,7 @@ namespace ScrapEra.CleanReader
                 if (grandParentElement == null ||
                     "html".Equals(grandParentElement.Name.LocalName, StringComparison.OrdinalIgnoreCase)) continue;
                 candidateElements.Add(grandParentElement);
-                AddPointsToElementScore(grandParentElement, score / 2);
+                AddPointsToElementScore(grandParentElement, score/2);
             }
             return candidateElements;
         }
@@ -302,7 +302,7 @@ namespace ScrapEra.CleanReader
                 var candidateScore = GetElementScore(candidateElement);
                 // Scale the final candidates score based on link density. Good content should have a
                 // relatively small link density (5% or less) and be mostly unaffected by this operation.
-                var newCandidateScore = (1.0f - GetLinksDensity(candidateElement)) * candidateScore;
+                var newCandidateScore = (1.0f - GetLinksDensity(candidateElement))*candidateScore;
                 SetElementScore(candidateElement, newCandidateScore);
                 if (topCandidateElement == null
                     || newCandidateScore > GetElementScore(topCandidateElement))
@@ -337,7 +337,7 @@ namespace ScrapEra.CleanReader
             var siblingScoreThreshold =
                 Math.Max(
                     MaxSiblingScoreTreshold,
-                    SiblingScoreTresholdCoefficient * topCandidateElementScore);
+                    SiblingScoreTresholdCoefficient*topCandidateElementScore);
             var topCandidateClass = topCandidateElement.GetClass();
             // iterate through the sibling elements and decide whether append them
             foreach (var siblingElement in siblingElements)
@@ -348,14 +348,14 @@ namespace ScrapEra.CleanReader
                 // Give a bonus if sibling nodes and top canidates have the same class name
                 if (!string.IsNullOrEmpty(topCandidateClass) && siblingElement.GetClass() == topCandidateClass)
                 {
-                    contentBonus += topCandidateElementScore * SiblingScoreTresholdCoefficient;
+                    contentBonus += topCandidateElementScore*SiblingScoreTresholdCoefficient;
                 }
                 if (siblingElement == topCandidateElement)
                 {
                     // we'll append the article content element (created from the top candidate element during an earlier step)
                     append = true;
                 }
-                else if ((GetElementScore(siblingElement) + contentBonus) >= siblingScoreThreshold)
+                else if (GetElementScore(siblingElement) + contentBonus >= siblingScoreThreshold)
                 {
                     // we'll append this element if the calculated score is higher than a treshold (derived from the score of the top candidate element)
                     append = true;
@@ -427,15 +427,15 @@ namespace ScrapEra.CleanReader
             CleanConditionally(articleContentElement, "div");
             var paraElements = articleContentElement.GetElementsByTagName("p");
             var elementsToRemove = (from paraElement in paraElements
-                                    let innerText = GetInnerText(paraElement)
-                                    where innerText.Length <= 0
-                                    let imgsCount = paraElement.GetElementsByTagName("img").Count()
-                                    where imgsCount <= 0
-                                    let embedsCount = paraElement.GetElementsByTagName("embed").Count()
-                                    where embedsCount <= 0
-                                    let objectsCount = paraElement.GetElementsByTagName("object").Count()
-                                    where objectsCount <= 0
-                                    select paraElement).ToList();
+                let innerText = GetInnerText(paraElement)
+                where innerText.Length <= 0
+                let imgsCount = paraElement.GetElementsByTagName("img").Count()
+                where imgsCount <= 0
+                let embedsCount = paraElement.GetElementsByTagName("embed").Count()
+                where embedsCount <= 0
+                let objectsCount = paraElement.GetElementsByTagName("object").Count()
+                where objectsCount <= 0
+                select paraElement).ToList();
             RemoveElements(elementsToRemove);
             /* Remove br's that are directly before paragraphs. */
             articleContentElement.SetInnerHtml(_breakBeforeParagraphRegex.Replace(articleContentElement.GetInnerHtml(),
@@ -454,7 +454,7 @@ namespace ScrapEra.CleanReader
             var linksLength =
                 element.GetElementsByTagName("a")
                     .Sum(anchorElement => GetInnerText(anchorElement).Length);
-            return (float)linksLength / elementInnerTextLength;
+            return (float) linksLength/elementInnerTextLength;
         }
 
         internal int GetSegmentsCount(string s, char ch)
@@ -504,7 +504,7 @@ namespace ScrapEra.CleanReader
             }
             else if (node is XText)
             {
-                result = ((XText)node).Value;
+                result = ((XText) node).Value;
             }
             else
             {
@@ -570,7 +570,7 @@ namespace ScrapEra.CleanReader
                              ||
                              (lisCount - LisCountTreshold > psCount && elementNameLower != "ul" &&
                               elementNameLower != "ol")
-                             || (inputsCount > psCount / 3)
+                             || (inputsCount > psCount/3)
                              ||
                              (innerTextLength < MinInnerTextLength &&
                               (imgsCount == 0 || imgsCount > MaxImagesInShortSegmentsCount))
@@ -579,11 +579,9 @@ namespace ScrapEra.CleanReader
                               linksDensity > MaxDensityForElementsWithSmallerClassWeight)
                              ||
                              (weight >= ClassWeightTreshold &&
-                              linksDensity > MaxDensityForElementsWithGreaterClassWeight)
-                             ||
-                             (embedsCount > MaxEmbedsCount ||
-                              (embedsCount == MaxEmbedsCount &&
-                               innerTextLength < MinInnerTextLengthInElementsWithEmbed));
+                              linksDensity > MaxDensityForElementsWithGreaterClassWeight) ||
+                             embedsCount > MaxEmbedsCount || (embedsCount == MaxEmbedsCount &&
+                                                              innerTextLength < MinInnerTextLengthInElementsWithEmbed);
                 if (remove)
                 {
                     elementsToRemove.Add(element);
@@ -836,6 +834,7 @@ namespace ScrapEra.CleanReader
 
         private const float MaxDensityForElementsWithGreaterClassWeight =
             Constants.MaxDensityForElementsWithGreaterClassWeight;
+
         private static readonly string StylesheetResourceName = Constants.StylesheetResourceName;
         public Func<AttributeTransformationInput, AttributeTransformationResult> ImageSourceTranformer { get; set; }
         public Func<AttributeTransformationInput, AttributeTransformationResult> AnchorHrefTranformer { get; set; }
