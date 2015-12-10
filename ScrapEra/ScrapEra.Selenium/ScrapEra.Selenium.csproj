@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ScrapEraSeleniumGenericException.cs" />
+    <Compile Include="ScriptWorker.cs" />
     <Compile Include="SeleniumCoreIE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,10 +58,12 @@
       <Project>{559e2242-4f8f-43b9-b57b-0d4d6435e443}</Project>
       <Name>ScrapEra.OutputProcessor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScrapEra.ScrapLogger\ScrapEra.ScrapLogger.csproj">
+      <Project>{9b8977ff-9336-4d74-875b-aab7b7458c95}</Project>
+      <Name>ScrapEra.ScrapLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
