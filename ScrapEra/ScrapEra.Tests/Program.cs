@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OpenQA.Selenium.IE;
 using ScrapEra.OutputProcessor;
 using ScrapEra.Selenium;
 
@@ -43,6 +44,11 @@ namespace ScrapEra.Tests
 
             //PdfGenerator.GeneratePdfSingleDataType("AdmitReject", "Univlist", data);
 
+
+
+
+
+            /*
             var termsToSearch = new List<string>
             {
                 //"Abhiman Kolte",
@@ -80,6 +86,10 @@ namespace ScrapEra.Tests
             PdfGenerator.GeneratePdfSingleDataType("google.pdf", "miner", dataMined);
             Console.WriteLine(driver.GetRunningTime(ref timerStart));
             driver.SafeCloseDriver();
+             * 
+             */
+            InternetExplorerDriver driver = null;
+            ScriptWorker.RunScript(ref driver, @"C:\Users\abhim\Desktop\ScrapEra\FB_Login_Script.txt");
         }
     }
 }
