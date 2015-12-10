@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2015-12-10T21:55:05" Importance="High" Text="Reverse Engineering Started." />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Boolean' -  (PrimitiveType)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Medium" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants' -  (Class)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ArticleTitleColonRegex1' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ArticleTitleColonRegex2' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ArticleTitleDashRegex1' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ArticleTitleDashRegex2' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ArticleTitleDashRegex3' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::BreakBeforeParagraphRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ClassWeightTreshold' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::Constants' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::DivToPElementsRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::EndOfSentenceRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::HtmlDocumentHeader' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::InnerDivId' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::KillBreaksRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::LikelyParagraphDivRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::LisCountTreshold' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MailtoHrefRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxArticleTitleLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxDensityForElementsWithGreaterClassWeight' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxDensityForElementsWithSmallerClassWeight' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxEmbedsCount' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxHeaderLinksDensity' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxImagesInShortSegmentsCount' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxPointsForSegmentsCount' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxSiblingParagraphLinksDensity' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MaxSiblingScoreTreshold' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinArticleTitleLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinArticleTitleWordsCount1' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinArticleTitleWordsCount2' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinCommaSegments' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinInnerTextLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinInnerTextLengthInElementsWithEmbed' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinParagraphLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::MinSiblingParagraphLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::NegativeWeightRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::NormalizeSpacesRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::OkMaybeItsACandidateRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::OverlayDivId' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ParagraphSegmentLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::PositiveWeightRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ReplaceDoubleBrsRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ScriptEndTag' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ScriptEndTagLength' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::ScriptTag' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::SiblingScoreTresholdCoefficient' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::StylesheetResourceName' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::TitleWhitespacesCleanUpRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::UnlikelyCandidatesRegex' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::UserAgentString' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::WebCompressionAlgorithms' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Constants::WebContentMimeInfo' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Medium" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Detection' -  (Class)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Detection::Confidence' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Detection::Detection' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Detection::IsReliable' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Detection::Language' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Medium" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PageLanguageDetection' -  (Class)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PageLanguageDetection::GetContentLanguage' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PageLanguageDetection::GetContentLanguage::content' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PageLanguageDetection::PageLanguageDetection' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Medium" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory' -  (Class)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::CheckIfCancelled' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::CheckIfCancelled::cancellationToken' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::cancelToken' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::delayInMilliseconds' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::duration' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::intervalInMilliseconds' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::maxIterations' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::periodicTaskCreationOptions' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::stopWatch' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::synchronous' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::MainPeriodicTaskAction::wrapperAction' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::PeriodicTaskFactory' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::action' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::cancelToken' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::delayInMilliseconds' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::duration' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::intervalInMilliseconds' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::maxIterations' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::periodicTaskCreationOptions' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::PeriodicTaskFactory::Start::synchronous' -  (Parameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Medium" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Result' -  (Class)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Result::Data' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::Result::Result' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Medium" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::ResultData' -  (Class)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::ResultData::Detections' -  (Property)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::ScrapEra::Utils::ResultData::ResultData' -  (Operation)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Action' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Collections' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Collections::Generic' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Collections::Generic::List' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Collections::Generic::List&lt;PageLanguageDetection‎‎.Detection‎&gt;' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Diagnostics' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Diagnostics::Stopwatch' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Single' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Text' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Text::RegularExpressions' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Text::RegularExpressions::Regex' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Threading' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Threading::CancellationToken' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Threading::Tasks' -  (Package)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Threading::Tasks::Task' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'DocDiagrams::System::Threading::Tasks::TaskCreationOptions' -  (Enumeration)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ef4a9055-7acc-4cbf-bd67-cbab596b0c04' -  (ClassifierTemplateParameter)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Integer' -  (PrimitiveType)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'String' -  (PrimitiveType)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: DocDiagrams::ScrapEra::Utils::Detection to DocDiagrams::System::Single (Association)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: DocDiagrams::ScrapEra::Utils::Result to DocDiagrams::ScrapEra::Utils::ResultData (Association)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: DocDiagrams::ScrapEra::Utils::ResultData to DocDiagrams::System::Collections::Generic::List&lt;PageLanguageDetection‎‎.Detection‎&gt; (Association)" />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="High" Text="(6) type(s) fully reverse engineered." />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="High" Text="(9) type(s) partially reverse engineered.  These types were not included in the original selection so their full definitions are not reverse engineered.  Instead, this shallow operation has simply ensured these types exist in the UML model because they are needed in order to fully describe other elements." />
+  <Message Timestamp="2015-12-10T21:55:07" Importance="High" Text="The reverse engineering operation completed with (0) error(s), and (0) warning(s)." />
+</Log>
