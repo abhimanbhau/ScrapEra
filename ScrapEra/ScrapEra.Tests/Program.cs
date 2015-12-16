@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenQA.Selenium.IE;
-using ScrapEra.OutputProcessor;
+﻿using OpenQA.Selenium.IE;
 using ScrapEra.Selenium;
 
 namespace ScrapEra.Tests
@@ -43,9 +40,6 @@ namespace ScrapEra.Tests
             //}
 
             //PdfGenerator.GeneratePdfSingleDataType("AdmitReject", "Univlist", data);
-
-
-
 
 
             /*

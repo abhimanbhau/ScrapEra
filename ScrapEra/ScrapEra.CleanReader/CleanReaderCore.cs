@@ -548,7 +548,6 @@ namespace ScrapEra.CleanReader
                 }
                 if (ElementLooksLikeParagraphDiv(element))
                 {
-                    // leave the element - it's probably just a div pretending to be a paragraph
                     continue;
                 }
                 /* If there are not very many commas and the number of non-paragraph elements
