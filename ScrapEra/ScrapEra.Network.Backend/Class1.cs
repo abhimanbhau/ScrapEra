@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScrapEra.Network.Backend
+﻿namespace ScrapEra.Network.Backend
 {
     public class Class1
     {

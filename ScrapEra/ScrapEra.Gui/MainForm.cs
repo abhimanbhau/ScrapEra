@@ -17,9 +17,9 @@ namespace ScrapEra.Gui
     public partial class MainForm : MetroForm
     {
         private readonly BindingSource _bs = new BindingSource();
+        private readonly AutoCompleteStringCollection _urlArray;
         private Thread _cleanReaderCentralThread;
-        private AutoCompleteStringCollection urlArray;
-        private string currentUrl;
+        private string _currentUrl;
 
         public MainForm()
         {
@@ -28,10 +28,10 @@ namespace ScrapEra.Gui
             lstLogs.DataSource = _bs;
             PeriodicTaskFactory.Start(() => { _bs.ResetBindings(false); }, 2000, maxIterations: 10);
             //var list =  Properties.Settings.Default.UrlHistory.Cast<string>().ToList();
-            urlArray = new AutoCompleteStringCollection ();
-            urlArray.AddRange(Properties.Settings.Default.UrlHistory.Cast<String>().ToArray());
+            _urlArray = new AutoCompleteStringCollection();
+            _urlArray.AddRange(Settings.Default.UrlHistory.Cast<string>().ToArray());
             //urlArray.Cast<string>().ToList().ForEach(Console.WriteLine);
-            txtCleanReaderUrl.AutoCompleteCustomSource = urlArray;
+            txtCleanReaderUrl.AutoCompleteCustomSource = _urlArray;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -58,8 +58,12 @@ namespace ScrapEra.Gui
 
         private void btnLoadCleanReader_Click(object sender, EventArgs e)
         {
-            if (txtCleanReaderUrl.Text.Trim().Length == 0) { return; }
-            if (!(txtCleanReaderUrl.Text.Trim().Contains("http://")) && !txtCleanReaderUrl.Text.Trim().Contains("https://"))
+            if (txtCleanReaderUrl.Text.Trim().Length == 0)
+            {
+                return;
+            }
+            if (!(txtCleanReaderUrl.Text.Trim().Contains("http://")) &&
+                !txtCleanReaderUrl.Text.Trim().Contains("https://"))
             {
                 txtCleanReaderUrl.Text = "http://" + txtCleanReaderUrl.Text;
             }
@@ -71,10 +75,10 @@ namespace ScrapEra.Gui
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            currentUrl = txtCleanReaderUrl.Text;
+            _currentUrl = txtCleanReaderUrl.Text;
             _cleanReaderCentralThread = new Thread(CleanReaderWorker) {IsBackground = true};
             _cleanReaderCentralThread.Start();
-            urlArray.Add(txtCleanReaderUrl.Text);
+            _urlArray.Add(txtCleanReaderUrl.Text);
         }
 
         public void CleanReaderWorker()
@@ -82,7 +86,7 @@ namespace ScrapEra.Gui
             try
             {
                 var tr = new CleanReaderWeb();
-                var stuff = tr.Transcode(currentUrl);
+                var stuff = tr.Transcode(_currentUrl);
                 webCleanReader.DocumentText = stuff;
                 CleanThread();
             }
@@ -124,12 +128,14 @@ namespace ScrapEra.Gui
 
         private void btnCleanReaderToHtml_Click(object sender, EventArgs e)
         {
-            var sf = new SaveFileDialog();
-            sf.Title = "Select File to save HTML content as";
-            sf.DefaultExt = "html";
-            sf.AddExtension = true;
-            sf.AutoUpgradeEnabled = true;
-            sf.Filter = "HTML files | *.html";
+            var sf = new SaveFileDialog
+            {
+                Title = "Select File to save HTML content as",
+                DefaultExt = "html",
+                AddExtension = true,
+                AutoUpgradeEnabled = true,
+                Filter = "HTML files | *.html"
+            };
             if (sf.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(sf.FileName, webCleanReader.DocumentText);
@@ -146,12 +152,14 @@ namespace ScrapEra.Gui
             {
                 sb.Append(str);
             }
-            var sf = new SaveFileDialog();
-            sf.Title = "Select File to save HTML content as";
-            sf.DefaultExt = "txt";
-            sf.AddExtension = true;
-            sf.AutoUpgradeEnabled = true;
-            sf.Filter = "Text files | *.txt";
+            var sf = new SaveFileDialog
+            {
+                Title = "Select File to save HTML content as",
+                DefaultExt = "txt",
+                AddExtension = true,
+                AutoUpgradeEnabled = true,
+                Filter = "Text files | *.txt"
+            };
             if (sf.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(sf.FileName, sb.ToString());
@@ -170,8 +178,8 @@ namespace ScrapEra.Gui
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.UrlHistory.AddRange(urlArray.Cast<string>().ToArray());
-            Properties.Settings.Default.Save();
+            Settings.Default.UrlHistory.AddRange(_urlArray.Cast<string>().ToArray());
+            Settings.Default.Save();
         }
     }
 }

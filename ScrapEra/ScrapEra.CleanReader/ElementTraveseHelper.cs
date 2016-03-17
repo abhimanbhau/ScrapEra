@@ -7,7 +7,6 @@ namespace ScrapEra.CleanReader
     {
         private readonly Action<XElement> _elementVisitor;
 
-
         public ElementTraveseHelper(Action<XElement> elementVisitor)
         {
             if (elementVisitor == null)
@@ -17,7 +16,6 @@ namespace ScrapEra.CleanReader
 
             _elementVisitor = elementVisitor;
         }
-
 
         public void Traverse(XElement element)
         {
@@ -44,7 +42,6 @@ namespace ScrapEra.CleanReader
     internal class ChildNodesTraverser
     {
         private readonly Action<XNode> _childNodeVisitor;
-
 
         public ChildNodesTraverser(Action<XNode> childNodeVisitor)
         {

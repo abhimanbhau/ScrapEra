@@ -4,7 +4,7 @@ using ScrapEra.OutputProcessor;
 
 namespace ScrapEra.Selenium
 {
-    public static class SeleniumCoreIE
+    public static class SeleniumCoreInternetExplorer
     {
         public static InternetExplorerDriver GetIeDriverInstance(string baseUrl)
         {

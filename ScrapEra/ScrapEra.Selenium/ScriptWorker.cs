@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using OpenQA.Selenium.IE;
-using ScrapEra.ScrapLogger;
 using ScrapEra.OutputProcessor;
+using ScrapEra.ScrapLogger;
 
 namespace ScrapEra.Selenium
 {
     public static class ScriptWorker
     {
-
         public static void RunScript(ref InternetExplorerDriver driver, string scriptPath)
         {
             Thread.Sleep(700);
@@ -21,11 +19,10 @@ namespace ScrapEra.Selenium
                 Logger.LogI("ScriptWorker -> " + line);
                 if (line.StartsWith("#"))
                 {
-                    continue;
                 }
-                else if (line.ToUpper().Contains("INIT"))
+                if (line.ToUpper().Contains("INIT"))
                 {
-                    driver = SeleniumCoreIE.GetIeDriverInstance(line.Split(' ')[1].Replace("\"", ""));
+                    driver = SeleniumCoreInternetExplorer.GetIeDriverInstance(line.Split(' ')[1].Replace("\"", ""));
                 }
                 else if (line.ToUpper().Contains("NAVIGATE"))
                 {
@@ -47,9 +44,6 @@ namespace ScrapEra.Selenium
                             driver.
                                 FindElementByXPath(tokens[1].Substring(tokens[1].
                                     IndexOf(":") + 1)).SendKeys(GetTextToType(line));
-                            break;
-
-                        default:
                             break;
                     }
                 }
@@ -76,14 +70,13 @@ namespace ScrapEra.Selenium
                 {
                     var tokens = line.Split(' ');
                     // Console.WriteLine(driver.FindElementByXPath(tokens[1].Substring(tokens[1].IndexOf(":") + 1)).Text);
-                    PdfGenerator.GeneratePdfSingleDataType(Path.GetTempFileName().Replace(".tmp", ".pdf "), 
-                        "ScriptWorker Demo", 
+                    PdfGenerator.GeneratePdfSingleDataType(Path.GetTempFileName().Replace(".tmp", ".pdf "),
+                        "ScriptWorker Demo",
                         driver.FindElementByXPath(tokens[1].Substring(tokens[1].IndexOf(":") + 1)).Text);
-
                 }
                 else if (line.ToUpper().Contains("WAIT"))
                 {
-                    Thread.Sleep((int)double.Parse(line.Split(' ')[1]) * 1000);
+                    Thread.Sleep((int) double.Parse(line.Split(' ')[1])*1000);
                 }
                 else if (line.ToUpper().Contains("SCREENSHOT"))
                 {
@@ -104,11 +97,10 @@ namespace ScrapEra.Selenium
                 Logger.LogI("ScriptWorker -> " + line);
                 if (line.StartsWith("#"))
                 {
-                    continue;
                 }
                 else if (line.ToUpper().Contains("INIT"))
                 {
-                    driver = SeleniumCoreIE.GetIeDriverInstance(line.Split(' ')[1].Replace("\"", ""));
+                    driver = SeleniumCoreInternetExplorer.GetIeDriverInstance(line.Split(' ')[1].Replace("\"", ""));
                 }
                 else if (line.ToUpper().Contains("NAVIGATE"))
                 {
@@ -130,9 +122,6 @@ namespace ScrapEra.Selenium
                             driver.
                                 FindElementByXPath(tokens[1].Substring(tokens[1].
                                     IndexOf(":") + 1)).SendKeys(GetTextToType(line));
-                            break;
-
-                        default:
                             break;
                     }
                 }
@@ -159,14 +148,13 @@ namespace ScrapEra.Selenium
                 {
                     var tokens = line.Split(' ');
                     // Console.WriteLine(driver.FindElementByXPath(tokens[1].Substring(tokens[1].IndexOf(":") + 1)).Text);
-                    PdfGenerator.GeneratePdfSingleDataType(Path.GetTempFileName().Replace(".tmp", ".pdf "), 
-                        "ScriptWorker Demo", 
+                    PdfGenerator.GeneratePdfSingleDataType(Path.GetTempFileName().Replace(".tmp", ".pdf "),
+                        "ScriptWorker Demo",
                         driver.FindElementByXPath(tokens[1].Substring(tokens[1].IndexOf(":") + 1)).Text);
-
                 }
                 else if (line.ToUpper().Contains("WAIT"))
                 {
-                    Thread.Sleep((int)double.Parse(line.Split(' ')[1]) * 1000);
+                    Thread.Sleep((int) double.Parse(line.Split(' ')[1])*1000);
                 }
                 else if (line.ToUpper().Contains("SCREENSHOT"))
                 {

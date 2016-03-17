@@ -16,7 +16,6 @@ namespace ScrapEra.Utils
 
         public const string WebCompressionAlgorithms = "gzip,deflate";
         public const string WebContentMimeInfo = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-
         // CleanReader Core Constants
         public const string OverlayDivId = "readOverlay";
         public const string InnerDivId = "mainContent";
@@ -42,7 +41,6 @@ namespace ScrapEra.Utils
         public const float MaxDensityForElementsWithSmallerClassWeight = 0.2f;
         public const float MaxDensityForElementsWithGreaterClassWeight = 0.5f;
         public const string StylesheetResourceName = "ScrapEra.CleanReader.Resources.ScrapEra.css";
-
         // CleanReader Core Compiled Regexes
         public static readonly Regex ArticleTitleColonRegex1 = new Regex(".*:(.*)", RegexOptions.Compiled);
         public static readonly Regex ArticleTitleColonRegex2 = new Regex("[^:]*[:](.*)", RegexOptions.Compiled);

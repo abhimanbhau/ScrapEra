@@ -502,13 +502,17 @@ namespace ScrapEra.CleanReader
             {
                 result = element.Value;
             }
-            else if (node is XText)
-            {
-                result = ((XText) node).Value;
-            }
             else
             {
-                throw new NotSupportedException(string.Format("Nodes of type '{0}' are not supported.", node.GetType()));
+                var text = node as XText;
+                if (text != null)
+                {
+                    result = text.Value;
+                }
+                else
+                {
+                    throw new NotSupportedException(string.Format("Nodes of type '{0}' are not supported.", node.GetType()));
+                }
             }
             result = (result ?? "").Trim();
             return _normalizeSpacesRegex.Replace(result, " ");
