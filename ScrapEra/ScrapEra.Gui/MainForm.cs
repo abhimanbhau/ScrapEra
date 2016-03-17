@@ -18,6 +18,8 @@ namespace ScrapEra.Gui
     {
         private readonly BindingSource _bs = new BindingSource();
         private Thread _cleanReaderCentralThread;
+        private AutoCompleteStringCollection urlArray;
+        private string currentUrl;
 
         public MainForm()
         {
@@ -25,6 +27,11 @@ namespace ScrapEra.Gui
             _bs.DataSource = Logger.LogList;
             lstLogs.DataSource = _bs;
             PeriodicTaskFactory.Start(() => { _bs.ResetBindings(false); }, 2000, maxIterations: 10);
+            //var list =  Properties.Settings.Default.UrlHistory.Cast<string>().ToList();
+            urlArray = new AutoCompleteStringCollection ();
+            urlArray.AddRange(Properties.Settings.Default.UrlHistory.Cast<String>().ToArray());
+            //urlArray.Cast<string>().ToList().ForEach(Console.WriteLine);
+            txtCleanReaderUrl.AutoCompleteCustomSource = urlArray;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -51,6 +58,11 @@ namespace ScrapEra.Gui
 
         private void btnLoadCleanReader_Click(object sender, EventArgs e)
         {
+            if (txtCleanReaderUrl.Text.Trim().Length == 0) { return; }
+            if (!(txtCleanReaderUrl.Text.Trim().Contains("http://")) && !txtCleanReaderUrl.Text.Trim().Contains("https://"))
+            {
+                txtCleanReaderUrl.Text = "http://" + txtCleanReaderUrl.Text;
+            }
             if (_cleanReaderCentralThread != null)
             {
                 MetroMessageBox.Show(this,
@@ -59,8 +71,10 @@ namespace ScrapEra.Gui
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            currentUrl = txtCleanReaderUrl.Text;
             _cleanReaderCentralThread = new Thread(CleanReaderWorker) {IsBackground = true};
             _cleanReaderCentralThread.Start();
+            urlArray.Add(txtCleanReaderUrl.Text);
         }
 
         public void CleanReaderWorker()
@@ -68,7 +82,7 @@ namespace ScrapEra.Gui
             try
             {
                 var tr = new CleanReaderWeb();
-                var stuff = tr.Transcode(txtCleanReaderUrl.Text);
+                var stuff = tr.Transcode(currentUrl);
                 webCleanReader.DocumentText = stuff;
                 CleanThread();
             }
@@ -146,7 +160,18 @@ namespace ScrapEra.Gui
 
         private void btnCleanReaderConfigure_Click(object sender, EventArgs e)
         {
-            MetroMessageBox.Show(this, "Not yet implemented", "WIP", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            webCleanReader.ShowPrintDialog();
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            webCleanReader.ShowPrintPreviewDialog();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.UrlHistory.AddRange(urlArray.Cast<string>().ToArray());
+            Properties.Settings.Default.Save();
         }
     }
 }

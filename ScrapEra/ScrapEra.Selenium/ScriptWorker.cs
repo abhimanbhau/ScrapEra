@@ -11,6 +11,7 @@ namespace ScrapEra.Selenium
 {
     public static class ScriptWorker
     {
+
         public static void RunScript(ref InternetExplorerDriver driver, string scriptPath)
         {
             Thread.Sleep(700);

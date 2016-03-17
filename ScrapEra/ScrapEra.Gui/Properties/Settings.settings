@@ -1,11 +1,17 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="ScrapEra.Gui.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ScrapEra.Gui.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Version" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1.0.1 beta</Value>
+    </Setting>
+    <Setting Name="UrlHistory" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;https://en.wikipedia.org/wiki/Andrew_Wiles&lt;/string&gt;
+  &lt;string&gt;https://www.google.co.in/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=1&amp;amp;ved=0ahUKEwjovt6Q8sfLAhVDuw8KHW79BFcQFggcMAA&amp;amp;url=https%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fb0wes9a3(v%3Dvs.110).aspx&amp;amp;usg=AFQjCNEvE211XFr1_oaghKs_MLbPQZrF0A&amp;amp;sig2=c5M9TKBknbtGWqupBx8W7g&lt;/string&gt;
+  &lt;string&gt;http://www.google.com&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
