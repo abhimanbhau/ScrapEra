@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium.IE;
 using ScrapEra.OutputProcessor;
+using ScrapEra.ScrapLogger;
 
 namespace ScrapEra.Selenium
 {
@@ -27,6 +28,8 @@ namespace ScrapEra.Selenium
             }
             catch (Exception ex)
             {
+                Logger.LogE(ex.Source + " -> " + ex.Message +
+                            Environment.NewLine + ex.StackTrace);
                 throw new ScrapEraSeleniumGenericException(ex.ToString());
             }
         }

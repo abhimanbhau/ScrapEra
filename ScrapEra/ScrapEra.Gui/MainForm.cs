@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Forms;
+using OpenQA.Selenium.IE;
 using ScrapEra.CleanReader;
 using ScrapEra.Gui.Properties;
 using ScrapEra.ScrapLogger;
+using ScrapEra.Selenium;
 using ScrapEra.Utils;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
@@ -58,6 +62,8 @@ namespace ScrapEra.Gui
 
         private void btnLoadCleanReader_Click(object sender, EventArgs e)
         {
+            Logger.LogI(GetType().FullName + "." + MethodBase.GetCurrentMethod().Name +
+                        " Starting CleanReader for URL - " + txtCleanReaderUrl.Text);
             if (txtCleanReaderUrl.Text.Trim().Length == 0)
             {
                 return;
@@ -97,6 +103,8 @@ namespace ScrapEra.Gui
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                Logger.LogE(ex.Source + " -> " + ex.Message +
+                            Environment.NewLine + ex.StackTrace);
             }
         }
 
@@ -106,9 +114,10 @@ namespace ScrapEra.Gui
             {
                 _cleanReaderCentralThread = null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // ignored
+                Logger.LogE(ex.Source + " -> " + ex.Message +
+                            Environment.NewLine + ex.StackTrace);
             }
         }
 
@@ -178,8 +187,40 @@ namespace ScrapEra.Gui
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Default.UrlHistory.AddRange(_urlArray.Cast<string>().ToArray());
+            Settings.Default.UrlHistory.AddRange(_urlArray.Cast<string>().ToArray().Distinct().ToArray());
             Settings.Default.Save();
+        }
+
+        private void btnRunScript_Click(object sender, EventArgs e)
+        {
+            if (txtSourceFolder.Text.Trim().Length == 0)
+            {
+                Logger.LogE(GetType().FullName + "." + MethodBase.GetCurrentMethod().Name
+                            + " Select a valid path");
+                MetroMessageBox.Show(this, "Please select a valid folder path");
+                return;
+            }
+            if (txtSeleniumCode.Text.Trim().Length == 0)
+            {
+            }
+            InternetExplorerDriver driver = null;
+            ScriptWorker.RunScript(ref driver, txtSeleniumCode.Lines, txtSourceFolder.Text);
+            Process.Start("Explorer.exe", txtSourceFolder.Text);
+        }
+
+        private void btnBrowseFolderPath_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    txtSourceFolder.Text = dialog.SelectedPath;
+                }
+            }
+            if (!Directory.Exists(txtSourceFolder.Text))
+            {
+                Directory.CreateDirectory(txtSourceFolder.Text);
+            }
         }
     }
 }

@@ -58,6 +58,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.48.2\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs">
@@ -111,6 +114,10 @@
     <ProjectReference Include="..\ScrapEra.ScrapLogger\ScrapEra.ScrapLogger.csproj">
       <Project>{9b8977ff-9336-4d74-875b-aab7b7458c95}</Project>
       <Name>ScrapEra.ScrapLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScrapEra.Selenium\ScrapEra.Selenium.csproj">
+      <Project>{099627e9-7150-43c7-9112-5eacccd32618}</Project>
+      <Name>ScrapEra.Selenium</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScrapEra.Utils\ScrapEra.Utils.csproj">
       <Project>{f31da3e4-2f1c-4e5c-a953-fbb5c99bdda7}</Project>

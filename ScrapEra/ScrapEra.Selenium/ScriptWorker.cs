@@ -76,7 +76,7 @@ namespace ScrapEra.Selenium
                 }
                 else if (line.ToUpper().Contains("WAIT"))
                 {
-                    Thread.Sleep((int) double.Parse(line.Split(' ')[1])*1000);
+                    Thread.Sleep((int)double.Parse(line.Split(' ')[1]) * 1000);
                 }
                 else if (line.ToUpper().Contains("SCREENSHOT"))
                 {
@@ -90,7 +90,8 @@ namespace ScrapEra.Selenium
             }
         }
 
-        public static void RunScript(ref InternetExplorerDriver driver, IEnumerable<string> scriptContent)
+        public static void RunScript(ref InternetExplorerDriver driver, IEnumerable<string> scriptContent,
+            string folderPath)
         {
             foreach (var line in scriptContent)
             {
@@ -148,18 +149,18 @@ namespace ScrapEra.Selenium
                 {
                     var tokens = line.Split(' ');
                     // Console.WriteLine(driver.FindElementByXPath(tokens[1].Substring(tokens[1].IndexOf(":") + 1)).Text);
-                    PdfGenerator.GeneratePdfSingleDataType(Path.GetTempFileName().Replace(".tmp", ".pdf "),
+                    PdfGenerator.GeneratePdfSingleDataType(folderPath + Path.GetTempFileName().Replace(".tmp", ".pdf "),
                         "ScriptWorker Demo",
                         driver.FindElementByXPath(tokens[1].Substring(tokens[1].IndexOf(":") + 1)).Text);
                 }
                 else if (line.ToUpper().Contains("WAIT"))
                 {
-                    Thread.Sleep((int) double.Parse(line.Split(' ')[1])*1000);
+                    Thread.Sleep((int)double.Parse(line.Split(' ')[1]) * 1000);
                 }
                 else if (line.ToUpper().Contains("SCREENSHOT"))
                 {
-                    //driver.GetScreenshot().SaveAsFile(line.Split(' ')[1], ImageFormat.Png);
-                    driver.DumpScreenshot(line.Split(' ')[1]);
+                    driver.GetScreenshot().SaveAsFile(folderPath + line.Split(' ')[1], ImageFormat.Png);
+                    //driver.DumpScreenshot(line.Split(' ')[1]);
                 }
                 else if (line.ToUpper().Contains("STOP"))
                 {

@@ -48,15 +48,28 @@
             this.lstLogs = new System.Windows.Forms.ListBox();
             this.tabAbout = new MetroFramework.Controls.MetroTabPage();
             this.txtAbout = new MetroFramework.Controls.MetroTextBox();
-            this.tabHome = new MetroFramework.Controls.MetroTabPage();
             this.tabDashboard = new MetroFramework.Controls.MetroTabPage();
+            this.tabHome = new MetroFramework.Controls.MetroTabPage();
             this.tabLocalScraping = new MetroFramework.Controls.MetroTabPage();
+            this.txtSeleniumCode = new MetroFramework.Controls.MetroTextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRunScript = new MetroFramework.Controls.MetroButton();
+            this.txtSourceFolder = new MetroFramework.Controls.MetroTextBox();
+            this.btnBrowseFolderPath = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.tabDebug.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.tabAbout.SuspendLayout();
+            this.tabLocalScraping.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
@@ -65,14 +78,14 @@
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Controls.Add(this.tabDebug);
             this.metroTabControl1.Controls.Add(this.tabAbout);
-            this.metroTabControl1.Controls.Add(this.tabHome);
             this.metroTabControl1.Controls.Add(this.tabDashboard);
+            this.metroTabControl1.Controls.Add(this.tabHome);
             this.metroTabControl1.Controls.Add(this.tabLocalScraping);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(40, 115);
             this.metroTabControl1.Margin = new System.Windows.Forms.Padding(6);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 6;
             this.metroTabControl1.Size = new System.Drawing.Size(1440, 846);
             this.metroTabControl1.TabIndex = 2;
             this.metroTabControl1.UseSelectable = true;
@@ -405,21 +418,6 @@
             this.txtAbout.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtAbout.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // tabHome
-            // 
-            this.tabHome.HorizontalScrollbarBarColor = true;
-            this.tabHome.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabHome.HorizontalScrollbarSize = 19;
-            this.tabHome.Location = new System.Drawing.Point(8, 41);
-            this.tabHome.Margin = new System.Windows.Forms.Padding(6);
-            this.tabHome.Name = "tabHome";
-            this.tabHome.Size = new System.Drawing.Size(1424, 797);
-            this.tabHome.TabIndex = 1;
-            this.tabHome.Text = "ScrapE home";
-            this.tabHome.VerticalScrollbarBarColor = true;
-            this.tabHome.VerticalScrollbarHighlightOnWheel = false;
-            this.tabHome.VerticalScrollbarSize = 20;
-            // 
             // tabDashboard
             // 
             this.tabDashboard.HorizontalScrollbarBarColor = true;
@@ -435,8 +433,28 @@
             this.tabDashboard.VerticalScrollbarHighlightOnWheel = false;
             this.tabDashboard.VerticalScrollbarSize = 20;
             // 
+            // tabHome
+            // 
+            this.tabHome.HorizontalScrollbarBarColor = true;
+            this.tabHome.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabHome.HorizontalScrollbarSize = 19;
+            this.tabHome.Location = new System.Drawing.Point(8, 41);
+            this.tabHome.Margin = new System.Windows.Forms.Padding(6);
+            this.tabHome.Name = "tabHome";
+            this.tabHome.Size = new System.Drawing.Size(1424, 797);
+            this.tabHome.TabIndex = 1;
+            this.tabHome.Text = "ScrapE home";
+            this.tabHome.VerticalScrollbarBarColor = true;
+            this.tabHome.VerticalScrollbarHighlightOnWheel = false;
+            this.tabHome.VerticalScrollbarSize = 20;
+            // 
             // tabLocalScraping
             // 
+            this.tabLocalScraping.Controls.Add(this.btnBrowseFolderPath);
+            this.tabLocalScraping.Controls.Add(this.txtSourceFolder);
+            this.tabLocalScraping.Controls.Add(this.btnRunScript);
+            this.tabLocalScraping.Controls.Add(this.txtSeleniumCode);
+            this.tabLocalScraping.Controls.Add(this.menuStrip1);
             this.tabLocalScraping.HorizontalScrollbarBarColor = true;
             this.tabLocalScraping.HorizontalScrollbarHighlightOnWheel = false;
             this.tabLocalScraping.HorizontalScrollbarSize = 19;
@@ -445,10 +463,150 @@
             this.tabLocalScraping.Name = "tabLocalScraping";
             this.tabLocalScraping.Size = new System.Drawing.Size(1424, 797);
             this.tabLocalScraping.TabIndex = 4;
-            this.tabLocalScraping.Text = "Local Scraping Beta";
+            this.tabLocalScraping.Text = "Local Scraping";
             this.tabLocalScraping.VerticalScrollbarBarColor = true;
             this.tabLocalScraping.VerticalScrollbarHighlightOnWheel = false;
             this.tabLocalScraping.VerticalScrollbarSize = 20;
+            // 
+            // txtSeleniumCode
+            // 
+            this.txtSeleniumCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtSeleniumCode.CustomButton.Image = null;
+            this.txtSeleniumCode.CustomButton.Location = new System.Drawing.Point(606, 2);
+            this.txtSeleniumCode.CustomButton.Name = "";
+            this.txtSeleniumCode.CustomButton.Size = new System.Drawing.Size(461, 461);
+            this.txtSeleniumCode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtSeleniumCode.CustomButton.TabIndex = 1;
+            this.txtSeleniumCode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtSeleniumCode.CustomButton.UseSelectable = true;
+            this.txtSeleniumCode.CustomButton.Visible = false;
+            this.txtSeleniumCode.Lines = new string[0];
+            this.txtSeleniumCode.Location = new System.Drawing.Point(3, 63);
+            this.txtSeleniumCode.MaxLength = 32767;
+            this.txtSeleniumCode.Multiline = true;
+            this.txtSeleniumCode.Name = "txtSeleniumCode";
+            this.txtSeleniumCode.PasswordChar = '\0';
+            this.txtSeleniumCode.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSeleniumCode.SelectedText = "";
+            this.txtSeleniumCode.SelectionLength = 0;
+            this.txtSeleniumCode.SelectionStart = 0;
+            this.txtSeleniumCode.Size = new System.Drawing.Size(1070, 466);
+            this.txtSeleniumCode.TabIndex = 2;
+            this.txtSeleniumCode.UseSelectable = true;
+            this.txtSeleniumCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtSeleniumCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1424, 40);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(77, 36);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // btnRunScript
+            // 
+            this.btnRunScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRunScript.Location = new System.Drawing.Point(1082, 63);
+            this.btnRunScript.Margin = new System.Windows.Forms.Padding(6);
+            this.btnRunScript.Name = "btnRunScript";
+            this.btnRunScript.Size = new System.Drawing.Size(336, 106);
+            this.btnRunScript.TabIndex = 6;
+            this.btnRunScript.Text = "Run Script";
+            this.btnRunScript.UseSelectable = true;
+            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
+            // 
+            // txtSourceFolder
+            // 
+            // 
+            // 
+            // 
+            this.txtSourceFolder.CustomButton.Image = null;
+            this.txtSourceFolder.CustomButton.Location = new System.Drawing.Point(903, 1);
+            this.txtSourceFolder.CustomButton.Name = "";
+            this.txtSourceFolder.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtSourceFolder.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtSourceFolder.CustomButton.TabIndex = 1;
+            this.txtSourceFolder.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtSourceFolder.CustomButton.UseSelectable = true;
+            this.txtSourceFolder.CustomButton.Visible = false;
+            this.txtSourceFolder.Lines = new string[] {
+        "metroTextBox1"};
+            this.txtSourceFolder.Location = new System.Drawing.Point(3, 545);
+            this.txtSourceFolder.MaxLength = 32767;
+            this.txtSourceFolder.Name = "txtSourceFolder";
+            this.txtSourceFolder.PasswordChar = '\0';
+            this.txtSourceFolder.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSourceFolder.SelectedText = "";
+            this.txtSourceFolder.SelectionLength = 0;
+            this.txtSourceFolder.SelectionStart = 0;
+            this.txtSourceFolder.Size = new System.Drawing.Size(925, 23);
+            this.txtSourceFolder.TabIndex = 7;
+            this.txtSourceFolder.Text = "metroTextBox1";
+            this.txtSourceFolder.UseSelectable = true;
+            this.txtSourceFolder.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtSourceFolder.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // btnBrowseFolderPath
+            // 
+            this.btnBrowseFolderPath.Location = new System.Drawing.Point(934, 545);
+            this.btnBrowseFolderPath.Name = "btnBrowseFolderPath";
+            this.btnBrowseFolderPath.Size = new System.Drawing.Size(139, 23);
+            this.btnBrowseFolderPath.TabIndex = 8;
+            this.btnBrowseFolderPath.Text = "Browse";
+            this.btnBrowseFolderPath.UseSelectable = true;
+            this.btnBrowseFolderPath.Click += new System.EventHandler(this.btnBrowseFolderPath_Click);
             // 
             // MainForm
             // 
@@ -462,6 +620,7 @@
             this.ClientSize = new System.Drawing.Size(1520, 999);
             this.Controls.Add(this.metroTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(40, 115, 40, 38);
@@ -480,6 +639,10 @@
             this.tabDebug.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
             this.tabAbout.ResumeLayout(false);
+            this.tabLocalScraping.ResumeLayout(false);
+            this.tabLocalScraping.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -509,5 +672,16 @@
         private MetroFramework.Controls.MetroButton btnCleanReaderHelp;
         private MetroFramework.Controls.MetroButton btnPreview;
         private System.Windows.Forms.TextBox txtCleanReaderUrl;
+        private MetroFramework.Controls.MetroTextBox txtSeleniumCode;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private MetroFramework.Controls.MetroButton btnRunScript;
+        private MetroFramework.Controls.MetroButton btnBrowseFolderPath;
+        private MetroFramework.Controls.MetroTextBox txtSourceFolder;
     }
 }
