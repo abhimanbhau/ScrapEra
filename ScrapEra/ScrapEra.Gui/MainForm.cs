@@ -36,6 +36,7 @@ namespace ScrapEra.Gui
             _urlArray.AddRange(Settings.Default.UrlHistory.Cast<string>().ToArray());
             //urlArray.Cast<string>().ToList().ForEach(Console.WriteLine);
             txtCleanReaderUrl.AutoCompleteCustomSource = _urlArray;
+            rbtnIE.Checked = true;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -197,11 +198,15 @@ namespace ScrapEra.Gui
             {
                 Logger.LogE(GetType().FullName + "." + MethodBase.GetCurrentMethod().Name
                             + " Select a valid path");
-                MetroMessageBox.Show(this, "Please select a valid folder path");
+                MetroMessageBox.Show(this, "Please select a valid folder path", "Error", MessageBoxButtons.OK
+                    , MessageBoxIcon.Error);
                 return;
             }
             if (txtSeleniumCode.Text.Trim().Length == 0)
             {
+                MetroMessageBox.Show(this, "Code editor is empty.\nWrite code or load existing code from a file",
+                    "Error", MessageBoxButtons.OK
+                    , MessageBoxIcon.Error);
             }
             InternetExplorerDriver driver = null;
             ScriptWorker.RunScript(ref driver, txtSeleniumCode.Lines, txtSourceFolder.Text);
@@ -215,12 +220,56 @@ namespace ScrapEra.Gui
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     txtSourceFolder.Text = dialog.SelectedPath;
+                    if (!Directory.Exists(txtSourceFolder.Text))
+                    {
+                        Directory.CreateDirectory(txtSourceFolder.Text);
+                    }
                 }
             }
-            if (!Directory.Exists(txtSourceFolder.Text))
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FileDialog dialog = new OpenFileDialog())
             {
-                Directory.CreateDirectory(txtSourceFolder.Text);
+                try
+                {
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        txtSeleniumCode.Text = "";
+                        txtSeleniumCode.Lines = File.ReadAllLines(dialog.FileName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogE(GetType().FullName + "." + MethodBase.GetCurrentMethod().Name + " " +
+                                ex.Message);
+                }
             }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FileDialog dialog = new SaveFileDialog())
+            {
+                try
+                {
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllLines(dialog.FileName, txtSeleniumCode.Lines);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogE(GetType().FullName + "." + MethodBase.GetCurrentMethod().Name + " " +
+                                ex.Message);
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

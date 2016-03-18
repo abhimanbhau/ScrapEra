@@ -1,7 +1,4 @@
-﻿using OpenQA.Selenium.IE;
-using ScrapEra.Selenium;
-
-namespace ScrapEra.Tests
+﻿namespace ScrapEra.Tests
 {
     internal class Program
     {
@@ -82,8 +79,6 @@ namespace ScrapEra.Tests
             driver.SafeCloseDriver();
              * 
              */
-            InternetExplorerDriver driver = null;
-            ScriptWorker.RunScript(ref driver, @"C:\Users\abhim\Desktop\ScrapEra\FB_Login_Script.txt");
         }
     }
 }
