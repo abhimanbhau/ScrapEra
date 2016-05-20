@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Forms;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.PhantomJS;
 using ScrapEra.CleanReader;
 using ScrapEra.Gui.Properties;
 using ScrapEra.ScrapLogger;
@@ -83,7 +85,7 @@ namespace ScrapEra.Gui
                     MessageBoxIcon.Error);
             }
             _currentUrl = txtCleanReaderUrl.Text;
-            _cleanReaderCentralThread = new Thread(CleanReaderWorker) {IsBackground = true};
+            _cleanReaderCentralThread = new Thread(CleanReaderWorker) { IsBackground = true };
             _cleanReaderCentralThread.Start();
             _urlArray.Add(txtCleanReaderUrl.Text);
         }
@@ -207,10 +209,32 @@ namespace ScrapEra.Gui
                 MetroMessageBox.Show(this, "Code editor is empty.\nWrite code or load existing code from a file",
                     "Error", MessageBoxButtons.OK
                     , MessageBoxIcon.Error);
+                return;
             }
-            InternetExplorerDriver driver = null;
-            ScriptWorker.RunScript(ref driver, txtSeleniumCode.Lines, txtSourceFolder.Text);
-            Process.Start("Explorer.exe", txtSourceFolder.Text);
+            if (rbtnIE.Checked)
+            {
+                InternetExplorerDriver driver = null;
+                ScriptWorker.RunScript(ref driver, txtSeleniumCode.Lines, txtSourceFolder.Text);
+                Process.Start("Explorer.exe", txtSourceFolder.Text);
+            }
+            else if (rbtnSonicMode.Checked)
+            {
+                PhantomJSDriver driver = null;
+                ScriptWorker.RunScriptPhantom(ref driver, txtSeleniumCode.Lines, txtSourceFolder.Text);
+                Process.Start("Explorer.exe", txtSourceFolder.Text);
+            }
+            else if (rbtnHapMode.Checked)
+            {
+                ScriptWorker.RunScriptHap(txtSeleniumCode.Lines, txtSourceFolder.Text);
+                MetroMessageBox.Show(this, "Done");
+                Process.Start("Explorer.exe", txtSourceFolder.Text);
+            }
+            else
+            {
+                ScriptWorker.RunMagicMode(txtSeleniumCode.Lines, txtSourceFolder.Text);
+                MetroMessageBox.Show(this, "Done");
+                Process.Start("Explorer.exe", txtSourceFolder.Text);
+            }
         }
 
         private void btnBrowseFolderPath_Click(object sender, EventArgs e)
@@ -270,6 +294,12 @@ namespace ScrapEra.Gui
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnHelpShowForCoding_Click(object sender, EventArgs e)
+        {
+            MetroMessageBox.Show(this, "",
+                "ScrapEra script help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

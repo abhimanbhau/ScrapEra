@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 using ScrapEra.Utils;
 
@@ -36,7 +37,16 @@ namespace ScrapEra.CleanReader
             {
                 throw new ArgumentNullException("url");
             }
-            var responseBytes = makeRequestFunc();
+            byte[] responseBytes = null;
+            try
+            {
+                 responseBytes = makeRequestFunc();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                return "";
+            }
             var contentEncoding = _webClient.ResponseHeaders["Content-Encoding"];
             if (!string.IsNullOrEmpty(contentEncoding))
             {

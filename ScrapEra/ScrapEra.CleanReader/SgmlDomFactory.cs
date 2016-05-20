@@ -48,17 +48,24 @@ namespace ScrapEra.CleanReader
 
         private static XDocument LoadDocument(string htmlContent)
         {
-            using (var sgmlReader = new SgmlReader())
+            try
             {
-                sgmlReader.CaseFolding = CaseFolding.ToLower;
-                sgmlReader.DocType = "HTML";
-                sgmlReader.WhitespaceHandling = WhitespaceHandling.None;
-                using (var sr = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(htmlContent))))
+                using (var sgmlReader = new SgmlReader())
                 {
-                    sgmlReader.InputStream = sr;
-                    var document = XDocument.Load(sgmlReader);
-                    return document;
+                    sgmlReader.CaseFolding = CaseFolding.ToLower;
+                    sgmlReader.DocType = "HTML";
+                    sgmlReader.WhitespaceHandling = WhitespaceHandling.None;
+                    using (var sr = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(htmlContent))))
+                    {
+                        sgmlReader.InputStream = sr;
+                        var document = XDocument.Load(sgmlReader);
+                        return document;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return new XDocument();
             }
         }
     }

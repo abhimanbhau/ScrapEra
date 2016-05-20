@@ -65,9 +65,9 @@
       <Project>{4f1060f3-3df4-43bc-80e9-3400c75e4f27}</Project>
       <Name>ScrapEra.ScrapEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScrapEra.Selenium\ScrapEra.Selenium.csproj">
+    <ProjectReference Include="..\ScrapEra.Selenium\ScrapEra.Automation.csproj">
       <Project>{099627e9-7150-43c7-9112-5eacccd32618}</Project>
-      <Name>ScrapEra.Selenium</Name>
+      <Name>ScrapEra.Automation</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScrapEra.Utils\ScrapEra.Utils.csproj">
       <Project>{f31da3e4-2f1c-4e5c-a953-fbb5c99bdda7}</Project>

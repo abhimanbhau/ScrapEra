@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.Gui", "ScrapEra.Gu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.CleanReader", "ScrapEra.CleanReader\ScrapEra.CleanReader.csproj", "{17C56878-D4B9-4B9D-8BC9-BAC50567160A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.Selenium", "ScrapEra.Selenium\ScrapEra.Selenium.csproj", "{099627E9-7150-43C7-9112-5EACCCD32618}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapEra.Automation", "ScrapEra.Selenium\ScrapEra.Automation.csproj", "{099627E9-7150-43C7-9112-5EACCCD32618}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "DocDiagrams", "DocDiagrams\DocDiagrams.modelproj", "{06FF29E6-9A5A-4869-BC4D-4E820BA2544F}"
 EndProject

@@ -30,7 +30,7 @@
             if (string.IsNullOrEmpty(htmlContent))
             {
                 extractedTitle = null;
-                return null;
+                return "";
             }
             var document = _transcoder.TranscodeToXml(htmlContent, url, out extractedTitle);
             return _sgmlDomSerializer.SerializeDocument(document);

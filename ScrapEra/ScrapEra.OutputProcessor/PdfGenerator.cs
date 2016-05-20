@@ -15,7 +15,7 @@ namespace ScrapEra.OutputProcessor
             {
                 Logger.LogI("GeneratePDF -> " + filePath);
                 var doc = new Document(PageSize.A3, 36, 72, 72, 144);
-                using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     PdfWriter.GetInstance(doc, fs);
                     doc.Open();
@@ -32,7 +32,7 @@ namespace ScrapEra.OutputProcessor
                     }
                     doc.Close();
                 }
-                ApplyWaterMark(filePath);
+                //ApplyWaterMark(filePath);
             }
             catch (Exception ex)
             {

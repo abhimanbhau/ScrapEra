@@ -8,14 +8,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Collections.Specialized;
+using System.Configuration;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
 namespace ScrapEra.Gui.Properties {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [CompilerGenerated()]
+    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    internal sealed partial class Settings : ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
         
         public static Settings Default {
             get {
@@ -23,26 +29,26 @@ namespace ScrapEra.Gui.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.0.1 beta")]
+        [ApplicationScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1.0.1 beta")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>https://en.wikipedia.org/wiki/Andrew_Wiles</string>
   <string>https://www.google.co.in/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0ahUKEwjovt6Q8sfLAhVDuw8KHW79BFcQFggcMAA&amp;url=https%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fb0wes9a3(v%3Dvs.110).aspx&amp;usg=AFQjCNEvE211XFr1_oaghKs_MLbPQZrF0A&amp;sig2=c5M9TKBknbtGWqupBx8W7g</string>
   <string>http://www.google.com</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection UrlHistory {
+        public StringCollection UrlHistory {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["UrlHistory"]));
+                return ((StringCollection)(this["UrlHistory"]));
             }
             set {
                 this["UrlHistory"] = value;

@@ -38,9 +38,8 @@ namespace ScrapEra.ScrapEngine
                 if (docUrl.StatusCode != HttpStatusCode.OK)
                 {
                     Logger.LogE("StartScrape -> " + Url + " Errorcode -> " + docUrl.StatusCode);
-                    return;
                 }
-                ParagraphText = _doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerHtml).ToList();
+                //ParagraphText = _doc.DocumentNode.SelectNodes("//p").Select(para => para.InnerHtml).ToList();
                 //foreach (var link in _doc.DocumentNode.SelectNodes("//a"))
                 //{
                 //    try
@@ -60,7 +59,13 @@ namespace ScrapEra.ScrapEngine
             {
                 Logger.LogE("StartScrape -> " + e.StackTrace + Environment.NewLine
                             + e.Message);
+                Console.WriteLine(e.Message);
             }
+        }
+
+        public HtmlNodeCollection GetElemsByXpath(string xpath)
+        {
+            return _doc.DocumentNode.SelectNodes(xpath);
         }
 
         public List<string> GetDivisionByClass(string className)
